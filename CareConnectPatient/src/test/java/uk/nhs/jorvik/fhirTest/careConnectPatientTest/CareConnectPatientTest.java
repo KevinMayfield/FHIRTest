@@ -52,12 +52,12 @@ public class CareConnectPatientTest  {
 	 @Produce(uri = "direct:startFHIRPatient")
      protected ProducerTemplate templateFHIRPatient;
 	 
-	 @EndpointInject(uri = "mock:file:C://test//Patient")
+	 @EndpointInject(uri = "mock:log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO")
 	 protected MockEndpoint resultEndpointFHIRPatient;
 		 
 	 private static final Logger log = LoggerFactory.getLogger(CareConnectPatientTest.class);
 	
-	 private static final FhirContext ctxhapihl7fhir = FhirContext.forDstu3();
+	 private static final FhirContext ctxhapiHL7Fhir = FhirContext.forDstu3();
 		
 	 
 	  @SuppressWarnings("unchecked")
@@ -67,7 +67,7 @@ public class CareConnectPatientTest  {
 			
 	    	Patient patient = buildCareConnectFHIRPatient();
 	        
-	    	IParser parser = ctxhapihl7fhir.newXmlParser().setPrettyPrint(true);
+	    	IParser parser = ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true);
 	    	
 	    	String response = parser.encodeResourceToString(patient);
 	        
@@ -87,7 +87,7 @@ public class CareConnectPatientTest  {
 	        	is.reset();
 	        	Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
 	        	Patient returnedPatient = null;
-	        	parser = ctxhapihl7fhir.newXmlParser();
+	        	parser = ctxhapiHL7Fhir.newXmlParser();
 				try
 				{
 					returnedPatient = parser.parseResource(Patient.class,reader);
@@ -105,6 +105,7 @@ public class CareConnectPatientTest  {
 				
 				assertEquals("Given Name",patient.getName().get(0).getGivenAsSingleString(),returnedPatient.getName().get(0).getGivenAsSingleString());
 				
+				assertEquals("Profile url present",patient.getMeta().getProfile().get(0).getValue(),returnedPatient.getMeta().getProfile().get(0).getValue());
 				
 				assertTrue("Extensions returned",returnedPatient.getExtension().size() > 1);
 				

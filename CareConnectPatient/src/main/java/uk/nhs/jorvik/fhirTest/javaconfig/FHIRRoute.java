@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FHIRRoute extends RouteBuilder {
-
-	
-	
 	@Override
 	public void configure() throws Exception {
 		
@@ -27,10 +24,7 @@ public class FHIRRoute extends RouteBuilder {
 					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/xml+fhir");
 				}
 			})
-			.to("http://test-rr8.trust.leedsth.nhs.uk:8080/hapi-fhir-jpaserver/baseStu3?throwExceptionOnFailure=false&connectionsPerRoute=60")
-			.to("log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO")
-			.to("file:C://test//Patient");
-		
+			.to("http://163.160.104.110:8080/hapi-fhir-jpaserver/baseStu3?throwExceptionOnFailure=false&connectionsPerRoute=60")
+			.to("log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO");
   	}
-	
 }
