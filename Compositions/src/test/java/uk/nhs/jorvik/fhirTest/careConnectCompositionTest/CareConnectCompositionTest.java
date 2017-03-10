@@ -93,7 +93,7 @@ public class CareConnectCompositionTest  {
 	  public void testSendCompositionBundleV1() throws Exception 
 	  {
 			
-	    	Bundle careRecordBundle = CareConnectExamples.buildCareConnectFHIRCompositionBundleV1();
+	    	Bundle careRecordBundle = CareConnectExamples.buildCareConnectFHIRCompositionBundleV2();
 	        IParser parser = ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true);
 	    	String response = parser.encodeResourceToString(careRecordBundle);
 	    	

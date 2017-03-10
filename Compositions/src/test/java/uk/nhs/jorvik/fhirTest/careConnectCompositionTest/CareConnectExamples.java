@@ -37,6 +37,27 @@ public final class CareConnectExamples {
 		compositionBundle.setType(BundleType.DOCUMENT);
 		
 		// Composition
+		Composition composition = CareConnectExamples.buildCareConnectFHIRCompositionV1();
+		compositionBundle.addEntry()
+			.setResource(composition);
+		
+		// Patient
+		Patient patient = CareConnectExamples.buildCareConnectFHIRPatient();
+		compositionBundle.addEntry()
+			.setResource(patient);
+
+		return compositionBundle;
+	}
+	
+	
+	public static Bundle buildCareConnectFHIRCompositionBundleV2()
+	{
+		Bundle compositionBundle = new Bundle();
+		
+		compositionBundle.setId("bundleTest1");
+		compositionBundle.setType(BundleType.DOCUMENT);
+		
+		// Composition
 		
 		Composition composition = CareConnectExamples.buildCareConnectFHIRCompositionV1();
 		composition.setSubject(new Reference("#pat"));

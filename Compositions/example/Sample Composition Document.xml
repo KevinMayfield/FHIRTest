@@ -1,0 +1,218 @@
+<Bundle xmlns="http://hl7.org/fhir">
+   <id value="bundleTest1"/>
+   <entry>
+      <resource>
+         <Composition xmlns="http://hl7.org/fhir">
+            <id value="test1"/>
+            <meta>
+               <profile value="https://fhir.leedsth.nhs.uk/Dstu2/StructureDefinition/LTHT-Leeds-Care-Record-Composition-2"/>
+            </meta>
+            <date value="2017-03-10T14:17:33+00:00"/>
+            <type>
+               <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="425173008"/>
+                  <display value="record extract (record artifact)"/>
+               </coding>
+            </type>
+            <class>
+               <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="708168004"/>
+                  <display value="Mental health service"/>
+               </coding>
+            </class>
+            <title value="Mental Health Record Extract"/>
+            <status value="final"/>
+            <confidentiality value="N"/>
+            <subject>
+               <reference value="#pat"/>
+            </subject>
+            <author>
+               <reference value="Device/c4c8d038-913a-490c-9682-47047f4155fb"/>
+            </author>
+            <custodian>
+               <reference value="https://fhir.nhs.net/Id/ods-organization-code/R19"/>
+            </custodian>
+            <section>
+               <code>
+                  <coding>
+                     <system value="http://snomed.info/sct"/>
+                     <code value="886731000000109"/>
+                     <display value="Patient demographics (record artifact)"/>
+                  </coding>
+               </code>
+               <entry>
+                  <reference value="#pat"/>
+               </entry>
+            </section>
+            <section>
+               <code>
+                  <coding>
+                     <system value="http://snomed.info/sct"/>
+                     <code value="886931000000107"/>
+                     <display value="alerts (record artifact)"/>
+                  </coding>
+               </code>
+               <entry>
+                  <reference value="#flag-ftest1"/>
+               </entry>
+               <entry>
+                  <reference value="#flag-ftest2"/>
+               </entry>
+            </section>
+            <section>
+               <code>
+                  <coding>
+                     <system value="http://snomed.info/sct"/>
+                     <code value="886921000000105"/>
+                     <display value="Allergies and adverse reactions"/>
+                  </coding>
+               </code>
+               <entry>
+                  <reference value="#allergy-atest1"/>
+               </entry>
+            </section>
+         </Composition>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <Patient xmlns="http://hl7.org/fhir">
+            <id value="pat"/>
+            <meta>
+               <profile value="https://fhir.hl7.org.uk/CareConnect-Patient-1.structuredefinition.xml"/>
+            </meta>
+            <extension url="http://hl7.org.uk/CareConnect-ReligiousAffiliation-1-Extension.structuredefinition.xml">
+               <valueCodeableConcept>
+                  <coding>
+                     <system value="http://snomed.info/sct"/>
+                     <code value="428506007"/>
+                     <display value="Druid, follower of religion"/>
+                  </coding>
+               </valueCodeableConcept>
+            </extension>
+            <extension url="http://hl7.org.uk/CareConnect-EthnicCategory-1-Extension.structuredefinition.xml">
+               <valueCodeableConcept>
+                  <coding>
+                     <system value="http://hl7.org.uk/fhir/ValueSet/CareConnect-EthnicCategory"/>
+                     <code value="CY"/>
+                     <display value="Other white European, European unspecified, European mixed"/>
+                  </coding>
+               </valueCodeableConcept>
+            </extension>
+            <identifier>
+               <extension url="http://hl7.org.uk/CareConnect-NhsNumberVerificatnStatus-1-Extension.structuredefinition.xml">
+                  <valueCodeableConcept>
+                     <coding>
+                        <system value="https://fhir.hl7.org.uk/fhir/ValueSet/CareConnect-NhsNumberVerificationStatus"/>
+                        <code value="01"/>
+                        <display value="Number present and verified"/>
+                     </coding>
+                  </valueCodeableConcept>
+               </extension>
+               <system value="https://fhir.nhs.net/Id/nhs-number"/>
+               <value value="9480431963"/>
+            </identifier>
+            <identifier>
+               <system value="https://fhir.jorvik.nhs.uk/PAS/Patient"/>
+               <value value="9437718"/>
+            </identifier>
+            <name>
+               <use value="usual"/>
+               <family value="DUFFY"/>
+               <given value="Gideon"/>
+               <given value="Brian"/>
+               <prefix value="Mr"/>
+            </name>
+            <gender value="female"/>
+            <birthDate value="1926-03-31"/>
+            <address>
+               <line value="1 CHURCH SQUARE"/>
+               <line value="Garforth"/>
+               <city value="LEEDS"/>
+               <postalCode value="LS25 1JF"/>
+            </address>
+            <contact>
+               <relationship>
+                  <coding>
+                     <system value="https://fhir.hl7.org.uk/fhir/ValueSet/CareConnect-PersonRelationshipType"/>
+                     <code value="01"/>
+                     <display value="Spouse"/>
+                  </coding>
+               </relationship>
+            </contact>
+            <managingOrganization>
+               <reference value="https://fhir.nhs.net/Id/ods-organization-code/B86675"/>
+            </managingOrganization>
+         </Patient>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <Flag xmlns="http://hl7.org/fhir">
+            <id value="flag-ftest1"/>
+            <meta>
+               <profile value="https://fhir.hl7.org.uk/CareConnect-Flag-1.structuredefinition.xml"/>
+            </meta>
+            <status value="active"/>
+            <subject>
+               <reference value="#pat"/>
+            </subject>
+            <code>
+               <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="2622007"/>
+                  <display value="Infected ulcer of skin (disorder)"/>
+               </coding>
+            </code>
+         </Flag>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <Flag xmlns="http://hl7.org/fhir">
+            <id value="flag-ftest2"/>
+            <meta>
+               <profile value="https://fhir.hl7.org.uk/CareConnect-Flag-1.structuredefinition.xml"/>
+            </meta>
+            <status value="active"/>
+            <subject>
+               <reference value="#pat"/>
+            </subject>
+            <code>
+               <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="1816003"/>
+                  <display value="Panic disorder with agoraphobia, severe agoraphobic avoidance AND mild panic attacks (disorder)"/>
+               </coding>
+            </code>
+         </Flag>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <AllergyIntolerance xmlns="http://hl7.org/fhir">
+            <id value="allergy-atest1"/>
+            <meta>
+               <profile value="https://fhir.hl7.org.uk/CareConnect-AllergyIntolerance-1.structuredefinition.xml"/>
+            </meta>
+            <patient>
+               <reference value="#pat"/>
+            </patient>
+            <assertedDate value="2017-02-18T14:17:33+00:00"/>
+            <reaction>
+               <substance>
+                  <coding>
+                     <system value="http://snomed.info/sct"/>
+                     <code value="311434007"/>
+                     <display value="Polyurethane fumes (substance)"/>
+                  </coding>
+               </substance>
+               <certainty value="likely"/>
+               <description value="Came out with a severe rash after the Garforth Velo Club peloton passed by the Podgers."/>
+            </reaction>
+         </AllergyIntolerance>
+      </resource>
+   </entry>
+</Bundle>
