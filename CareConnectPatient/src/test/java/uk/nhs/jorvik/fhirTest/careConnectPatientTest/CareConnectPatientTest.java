@@ -8,11 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 
@@ -26,12 +21,7 @@ import org.apache.camel.test.spring.MockEndpoints;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.HumanName.NameUse;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.Meta;
 import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -49,8 +39,11 @@ import uk.nhs.jorvik.fhirTest.javaconfig.CareConnectPatientApp;
 @MockEndpoints
 public class CareConnectPatientTest  {
 	
-	 @Produce(uri = "direct:startFHIRPatient")
-     protected ProducerTemplate templateFHIRPatient;
+	 @Produce(uri = "direct:startFHIRPatientV1")
+     protected ProducerTemplate templateFHIRPatientV1;
+	 
+	 @Produce(uri = "direct:startFHIRPatientV2")
+     protected ProducerTemplate templateFHIRPatientV2;
 	 
 	 @EndpointInject(uri = "mock:log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO")
 	 protected MockEndpoint resultEndpointFHIRPatient;
@@ -58,20 +51,55 @@ public class CareConnectPatientTest  {
 	 private static final Logger log = LoggerFactory.getLogger(CareConnectPatientTest.class);
 	
 	 private static final FhirContext ctxhapiHL7Fhir = FhirContext.forDstu3();
-		
 	 
-	  @SuppressWarnings("unchecked")
 	  @Test
-	  public void testSendPatient() throws Exception 
+	  public void testSendPatientExtensionV1() throws Exception 
 	  {
 			
-	    	Patient patient = buildCareConnectFHIRPatient();
+	    	Patient patient = CareConnectPatientExamples.customPatientExtensionV3();
 	        
 	    	IParser parser = ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true);
 	    	
 	    	String response = parser.encodeResourceToString(patient);
 	        
-	        templateFHIRPatient.sendBody("direct:startFHIRPatient",response);
+	        templateFHIRPatientV1.sendBody("direct:startFHIRPatientV1",response);
+	        
+	        resultEndpointFHIRPatient.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 
+	        resultEndpointFHIRPatient.assertIsSatisfied();
+	  }
+	  
+	  @Test
+	  public void testSendPatientV1() throws Exception 
+	  {
+			
+	    	Patient patient = CareConnectPatientExamples.buildCareConnectFHIRPatient();
+	        
+	    	IParser parser = ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true);
+	    	
+	    	String response = parser.encodeResourceToString(patient);
+	        
+	        templateFHIRPatientV1.sendBody("direct:startFHIRPatientV1",response);
+	        
+	        resultEndpointFHIRPatient.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 
+	        resultEndpointFHIRPatient.assertIsSatisfied();
+	        
+	  }
+	
+	
+	  
+		 
+	  @SuppressWarnings("unchecked")
+	  @Test
+	  public void testSendPatientV2() throws Exception 
+	  {
+			
+	    	Patient patient = CareConnectPatientExamples.buildCareConnectFHIRPatient();
+	        
+	    	IParser parser = ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true);
+	    	
+	    	String response = parser.encodeResourceToString(patient);
+	        
+	        templateFHIRPatientV2.sendBody("direct:startFHIRPatientV2",response);
 	        
 	        resultEndpointFHIRPatient.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 
 	        resultEndpointFHIRPatient.assertIsSatisfied();
@@ -145,147 +173,8 @@ public class CareConnectPatientTest  {
 	        {
 	        	fail();
 	        }
-	        
-	        
 	  }
-	
-	  public static Patient buildCareConnectFHIRPatient()
-			{
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				
-				Patient patient = new Patient();
-		        
-				// Add profile reference
-				Meta meta = new Meta();
-				meta.addProfile("http://hl7.org.uk/CareConnect-Patient-1.structuredefinition.xml");
-				patient.setMeta(meta);
-		        
-		        Identifier nhsNumber = patient.addIdentifier();
-		        nhsNumber
-			    	.setSystem(new String("http://fhir.nhs.net/Id/nhs-number"))
-			    	.setValue("9480431963");
-		       	
-		        CodeableConcept verificationStatusCode = new CodeableConcept();
-		        verificationStatusCode
-		        	.addCoding()
-		        	.setSystem("http://hl7.org.uk/fhir/ValueSet/CareConnect-NhsNumberVerificationStatus")
-		        	.setDisplay("Number present and verified")
-		        	.setCode("01");
-		        nhsNumber.addExtension()
-		        		.setUrl("http://hl7.org.uk/CareConnect-NhsNumberVerificatnStatus-1-Extension.structuredefinition.xml")
-		        		.setValue(verificationStatusCode);
-		        		
-		       	
-		        
-		        patient.addIdentifier()
-	        		.setSystem(new String("http://fhir.jorvik.nhs.uk/PAS/Patient"))
-	        		.setValue("9437718");
-		        
-		        patient.addName()
-		        	.setUse(NameUse.USUAL)
-		        	.setFamily("DUFFY")
-		        	.addGiven("Gideon")
-		        	.addGiven("Brian")
-		        	.addPrefix("Mr");
-		        
-		        patient.addAddress()
-		        	.addLine("1 CHURCH SQUARE")
-		        	.setCity("LEEDS")
-		        	.setPostalCode("LS25 1JF");
-		       
-		        
-		        patient.addContact().addRelationship()
-		    		.addCoding()
-		    			.setCode("01")
-		    			.setDisplay("Spouse")
-		    			.setSystem("http://hl7.org.uk/fhir/ValueSet/CareConnect-PersonRelationshipType");
-		        
-		        // Not CareConnect compliant
-		        patient.setGender(AdministrativeGender.FEMALE);
-		        
-		        Date birth;
-				try {
-					birth = dateFormat.parse("1926-03-31");
-					patient.setBirthDate(birth);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				
-				//
-				
-				patient.setManagingOrganization(new Reference("http://fhir.nhs.net/Id/ods-organization-code/B86675"));
-				
-				
-				// CareConnect Patient Profile extensions
-				
-				CodeableConcept religionCode = new CodeableConcept();
-				religionCode.addCoding()
-					.setSystem("http://snomed.info/sct")
-					.setDisplay("Druid, follower of religion")
-					.setCode("428506007");
-				patient.addExtension()
-					.setUrl("http://hl7.org.uk/CareConnect-ReligiousAffiliation-1-Extension.structuredefinition.xml")
-					.setValue(religionCode);
-				
-				CodeableConcept ethnicCode = new CodeableConcept();
-				ethnicCode.addCoding()
-					.setSystem("http://hl7.org.uk/fhir/ValueSet/CareConnect-EthnicCategory")
-					.setDisplay("Other white European, European unspecified, European mixed")
-					.setCode("CY");
-				patient.addExtension()
-					.setUrl("http://hl7.org.uk/CareConnect-EthnicCategory-1-Extension.structuredefinition.xml")
-					.setValue(ethnicCode);
-				
-				
-				
-				return patient;
-			}
-
-	
-		
-	  /*
-	   *  
-	   *  HapiContext ctxhapihl7v2 = new DefaultHapiContext();
-	    	ctxhapihl7v2.getParserConfiguration().setValidating(false);
-	        		//HL7DataFormat hapihl7v2 = new HL7DataFormat();
-	        ADT_A05 adt = buildPatientV2();
-	        Parser parser = ctxhapihl7v2.getPipeParser();
-	        String encodedMessage = parser.encode(adt);
-	        template.sendBody("direct:startV2",encodedMessage);
-	     */   
-	   /*
-	  public static ADT_A05 buildPatientV2() throws HL7Exception, IOException
-		{
-			//DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			
-			ADT_A05 adt = new ADT_A05();
-			adt.initQuickstart("ADT", "A28", "P");
-			          
-	          // Populate the MSH Segment
-	        MSH mshSegment = adt.getMSH();
-	        mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	        mshSegment.getSequenceNumber().setValue("123");
-	          
-	          // Populate the PID Segment
-	        PID pid = adt.getPID(); 
-	        pid.getPatientName(0).getFamilyName().getSurname().setValue("May");
-	        pid.getPatientName(0).getGivenName().setValue("Trees");
-	        pid.getPatientName(1).getGivenName().setValue("Are");
-	        pid.getPatientIdentifierList(0).getID().setValue("123456");
-	        
-	        //Date birth;
-			
-			//birth = dateFormat.parse("2003-07-23");
-			TSComponentOne tm = pid.getDateTimeOfBirth()
-				.getTimeOfAnEvent();
-			tm.setValue("20030623");
-			
-		
 	  
-			        
-			return adt;        
-		}
-	*/
 	  
 	
 }

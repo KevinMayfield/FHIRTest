@@ -236,6 +236,63 @@ public final class CareConnectExamples {
 		return careRecord;
 	}
 	
+	public static Composition buildCareConnectFHIRCompositionV1_5()
+	{
+		Composition careRecord = new Composition();
+		
+		// Add profile the resource is based on 
+		Meta meta = new Meta();
+		meta.addProfile("https://fhir.leedsth.nhs.uk/Dstu2/StructureDefinition/LTHT-Leeds-Care-Record-Composition-2");
+		careRecord.setMeta(meta);
+		
+		careRecord.setId("test1");
+		careRecord.setDate(new Date());
+		
+		CodeableConcept type = new CodeableConcept();
+		type.addCoding()
+			.setSystem("http://snomed.info/sct")
+			.setCode("425173008")
+			.setDisplay("record extract (record artifact)");
+		careRecord.setType(type);
+		
+		CodeableConcept class_ = new CodeableConcept();
+		class_.addCoding()
+			.setSystem("http://snomed.info/sct")
+			.setCode("708168004")
+			.setDisplay("Mental health service");
+		careRecord.setClass_(class_);
+		
+		careRecord.setTitle("Mental Health Record Extract");
+		careRecord.setStatus(CompositionStatus.FINAL);
+		// A virtual reference based on patient's NHS Number
+		careRecord.setSubject(new Reference("https://fhir.nhs.net/Id/nhs-number/9480431963"));
+		careRecord.setConfidentiality(DocumentConfidentiality.N); // Normal
+		careRecord.addAuthor(new Reference("Device/c4c8d038-913a-490c-9682-47047f4155fb"));
+		// A virtual reference to ODS organisation code
+		careRecord.setCustodian(new Reference("https://fhir.nhs.net/Id/ods-organization-code/R19"));
+		
+		CodeableConcept patientSectionCode = new CodeableConcept();
+		patientSectionCode.addCoding()
+			.setSystem("http://snomed.info/sct")
+			.setCode("886731000000109")
+			.setDisplay("Patient demographics (record artifact)");
+		careRecord.addSection()
+			//.setText(value) an exercise for the reader
+			.setCode(patientSectionCode);
+			
+		
+		CodeableConcept alertSectionCode = new CodeableConcept();
+		alertSectionCode.addCoding()
+			.setSystem("http://snomed.info/sct")
+			.setCode("886931000000107")
+			.setDisplay("alerts (record artifact)");
+		careRecord.addSection()
+			//.setText(value) an exercise for the reader
+			.setCode(alertSectionCode);
+		
+		return careRecord;
+	}
+	
 	public static Patient buildCareConnectFHIRPatient()
 		{
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

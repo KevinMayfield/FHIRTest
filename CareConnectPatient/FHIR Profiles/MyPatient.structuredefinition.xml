@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <meta>
+    <lastUpdated value="2017-03-13T12:23:29.265+00:00" />
+  </meta>
+  <url value="https://fhir.jorvik.nhs.uk/StructureDefinition/MyPatient" />
+  <name value="MyPatient" />
+  <status value="draft" />
+  <date value="2017-03-13T09:39:23.8082461Z" />
+  <kind value="resource" />
+  <constrainedType value="Patient" />
+  <abstract value="false" />
+  <base value="http://hl7.org/fhir/StructureDefinition/Patient" />
+  <differential>
+    <element>
+      <path value="Patient" />
+    </element>
+    <element>
+      <path value="Patient.extension" />
+      <slicing>
+        <discriminator value="url" />
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element>
+      <path value="Patient.extension" />
+      <name value="OnClinicalTrial" />
+      <short value="Base for all elements" />
+      <definition value="Optional Extensions Element - found in all resources." />
+      <min value="0" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="https://fhir.jorvik.nhs.uk/Extension/OnClinicalTrial" />
+      </type>
+    </element>
+    <element>
+      <path value="Patient.extension" />
+      <name value="ClinicalTrial" />
+      <short value="Base for all elements" />
+      <definition value="Optional Extensions Element - found in all resources." />
+      <min value="0" />
+      <type>
+        <code value="Extension" />
+        <profile value="https://fhir.jorvik.nhs.uk/Extension/ClinicalTrial" />
+      </type>
+    </element>
+    <element>
+      <path value="Patient.photo" />
+      <max value="0" />
+    </element>
+    <element>
+      <path value="Patient.contact.relationship" />
+      <binding>
+        <strength value="required" />
+        <valueSetReference>
+          <reference value="http://hl7.org.uk/CareConnect-PersonRelationshipType-1.valueset.xml" />
+        </valueSetReference>
+      </binding>
+    </element>
+    <element>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
+        <valueString value="Animal" />
+      </extension>
+      <path value="Patient.animal" />
+      <max value="0" />
+    </element>
+    <element>
+      <path value="Patient.managingOrganization" />
+      <type>
+        <code value="Reference" />
+        <profile value="https://fhir.hl7.org.uk/CareConnect-Organization-1.structuredefinition.xml" />
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="OnClinicalTrialExtension" />
+  <meta>
+    <lastUpdated value="2017-03-13T11:57:47.015+00:00" />
+  </meta>
+  <url value="https://fhir.jorvik.nhs.uk/Extension/OnClinicalTrial" />
+  <name value="OnClinicalTrialExtension" />
+  <status value="draft" />
+  <date value="2017-03-13T10:39:02.1172461Z" />
+  <kind value="datatype" />
+  <constrainedType value="Extension" />
+  <abstract value="false" />
+  <contextType value="resource" />
+  <context value="Patient" />
+  <base value="http://hl7.org/fhir/StructureDefinition/Extension" />
+  <differential>
+    <element>
+      <path value="Extension" />
+    </element>
+    <element>
+      <path value="Extension.url" />
+      <name value="OnClinicalTrial" />
+      <type>
+        <code value="uri" />
+        <profile value="http://fhir.jorvik.nhs.uk/Extension/OnClinicalTrial" />
+      </type>
+      <fixedUri value="https://fhir.jorvik.nhs.uk/Extension/OnClinicalTrial" />
+    </element>
+    <element>
+      <path value="Extension.valueBoolean" />
+      <type>
+        <code value="boolean" />
+      </type>
+    </element>
+  </differential>
+</StructureDefinition>
