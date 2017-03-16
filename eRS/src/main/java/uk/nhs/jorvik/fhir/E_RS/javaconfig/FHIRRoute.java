@@ -100,6 +100,7 @@ public class FHIRRoute extends RouteBuilder {
 		from("direct:BinaryGet")
 			.routeId("BinaryGet")
 			.to("http://api-ers.spine2.ncrs.nhs.uk:88/ers-external-service/v1/?throwExceptionOnFailure=false&connectionsPerRoute=60")
+			.to("log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO")
 			.to("mock:resultBinaryGet")
 			.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${in.header.breadcrumbId}-Attach-${in.header.FileRef}");
 		

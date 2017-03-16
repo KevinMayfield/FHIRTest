@@ -1,6 +1,7 @@
 package uk.nhs.jorvik.E_RS.Processor;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
@@ -59,14 +60,33 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 			}
 		}
 		
-		byte[] payload = newExchange.getIn().getBody(byte[].class);		
-		Binary binary = new Binary();
-		binary.setContentType(newExchange.getIn().getHeader(Exchange.CONTENT_TYPE).toString());
-		binary.setContent(payload);
+		InputStream is = (InputStream) newExchange.getIn().getBody();
+		try
+		{
+		      is.reset();
+		      Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) newExchange.getIn().getBody(byte[].class)));
+		      	
+		      char[] arr = new char[8 * 1024];
+		      StringBuilder buffer = new StringBuilder();
+		      int numCharsRead;
+		      while ((numCharsRead = reader.read(arr, 0, arr.length)) != -1) {
+		          buffer.append(arr, 0, numCharsRead);
+		      }
+		      reader.close();
 		
+			
+			Binary binary = new Binary();
+			binary.setContentType(newExchange.getIn().getHeader(Exchange.CONTENT_TYPE).toString());
+			// This appears to work but not convinced it's valid base64
+			binary.setContent(buffer.toString().getBytes());
+			
+			
+			bundle.addEntry().setResource(binary);
+		}
+		catch (Exception ex)
+		{
 		
-		bundle.addEntry().setResource(binary);
-		
+		}
 		oldExchange.getIn().setBody(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(bundle).getBytes());
 		
 		return oldExchange;

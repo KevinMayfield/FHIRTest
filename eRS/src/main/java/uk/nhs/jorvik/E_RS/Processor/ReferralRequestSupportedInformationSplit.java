@@ -59,9 +59,8 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 				if (referral.getContained().getContainedResources().get(c).getId().getIdPart().equals(support.getReference().getIdPart()))								
 				{
 					DocumentReference docRef = (DocumentReference) referral.getContained().getContainedResources().get(c);
-					documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle();
+					documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle()+",";
 				}
-				
 			}
 		}
 				
