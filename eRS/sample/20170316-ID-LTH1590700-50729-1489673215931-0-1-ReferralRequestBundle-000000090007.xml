@@ -1,0 +1,145 @@
+<Bundle xmlns="http://hl7.org/fhir">
+   <entry>
+      <resource>
+         <ReferralRequest xmlns="http://hl7.org/fhir">
+            <id value="000000090007"/>
+            <meta>
+               <versionId value="7"/>
+               <profile value="http://fhir.nhs.net/StructureDefinition/ers-referralrequest-1"/>
+            </meta>
+            <contained>
+               <Appointment xmlns="http://hl7.org/fhir">
+                  <id value="appointment"/>
+                  <meta>
+                     <profile value="http://fhir.nhs.net/StructureDefinition/ers-appointment-1"/>
+                  </meta>
+                  <status value="booked"/>
+                  <start value="2017-05-05T15:30:00.000Z"/>
+                  <end value="2017-05-05T16:00:00.000Z"/>
+                  <participant>
+                     <actor>
+                        <reference value="HealthcareService/90000"/>
+                        <display value="API_Test"/>
+                     </actor>
+                     <status value="accepted"/>
+                  </participant>
+               </Appointment>
+            </contained>
+            <extension url="http://fhir.nhs.net/StructureDefinition/extension-ers-appointment-1">
+               <valueReference>
+                  <reference value="#appointment"/>
+               </valueReference>
+            </extension>
+            <extension url="http://fhir.nhs.net/StructureDefinition/extension-ers-clinicalinfofirstsubmitted-1">
+               <valueDateTime value="2016-12-12T20:23:07.288Z"/>
+            </extension>
+            <status value="active"/>
+            <specialty>
+               <coding>
+                  <system value="http://fhir.nhs.net/ValueSet/ers-specialty-1"/>
+                  <code value="2WW"/>
+               </coding>
+            </specialty>
+            <priority>
+               <coding>
+                  <system value="http://fhir.nhs.net/ValueSet/ers-priority-1"/>
+                  <code value="TWO_WEEK_WAIT"/>
+               </coding>
+            </priority>
+            <patient>
+               <reference value="Patient/1000000001"/>
+            </patient>
+            <supportingInformation>
+               <reference value="DocumentReference/doc-2"/>
+            </supportingInformation>
+         </ReferralRequest>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <DocumentReference xmlns="http://hl7.org/fhir">
+            <id value="doc-1"/>
+            <identifier>
+               <system value="http://fhir.nhs.net/ValueSet/ers/Binary"/>
+               <value value="UBRN-000000090007"/>
+            </identifier>
+            <subject>
+               <reference value="Patient/1000000001"/>
+            </subject>
+            <type>
+               <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="25611000000107"/>
+                  <display value="Referral letter"/>
+               </coding>
+            </type>
+            <description value="Clinical Referral Information"/>
+            <content>
+               <attachment>
+                  <contentType value="application/pdf"/>
+                  <url value="Binary/doc-1"/>
+                  <title value="000000090007-ReferralCRI.pdf"/>
+               </attachment>
+            </content>
+         </DocumentReference>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <DocumentReference xmlns="http://hl7.org/fhir">
+            <id value="doc-2"/>
+            <meta>
+               <profile value="http://fhir.nhs.net/StructureDefinition/ers-documentreference-1"/>
+            </meta>
+            <identifier>
+               <system value="http://fhir.nhs.net/ValueSet/ers/Binary"/>
+               <value value="att-91953-90040"/>
+            </identifier>
+            <subject>
+               <reference value="Patient/1000000001"/>
+            </subject>
+            <type>
+               <coding>
+                  <system value="http://fhir.nhs.net/ValueSet/ers-attachmenttype-1"/>
+                  <code value="REFERRER"/>
+               </coding>
+            </type>
+            <created value="2016-12-12T00:00:00+00:00"/>
+            <indexed value="2017-03-16T14:06:57.597Z"/>
+            <status value="current"/>
+            <content>
+               <attachment id="90040">
+                  <extension url="http://fhir.nhs.net/StructureDefinition/extension-ers-attachedby-1">
+                     <valueReference>
+                        <reference value="Practitioner/021600556514"/>
+                     </valueReference>
+                  </extension>
+                  <contentType value="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                  <url value="Binary/doc-2"/>
+                  <size value="12671"/>
+                  <title value="Test Attachment 1.docx"/>
+                  <creation value="2016-12-12"/>
+               </attachment>
+            </content>
+         </DocumentReference>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <Binary xmlns="http://hl7.org/fhir">
+            <id value="doc-1"/>
+            <contentType value="application/pdf"/>
+            <content value="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R3JvdXAgTlYgXChBR1BMLXZlcnNpb25cKSk+PgplbmRvYmoKOCAwIG9iago8PC9CYXNlRm9udC9IZWx2ZXRpY2EtQm9sZC9FbmNvZGluZy9XaW5BbnNpRW5jb2RpbmcvU3VidHlwZS9UeXBlMS9UeXBlL0ZvbnQ+PgplbmRvYmoKOSAwIG9iago8PC9CYXNlRm9udC9IZWx2ZXRpY2EvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nL1N1YnR5cGUvVHlwZTEvVHlwZS9Gb250Pj4KZW5kb2JqCjcgMCBvYmoKPDwvQmFzZUZvbnQvSGVsdmV0aWNhLUJvbGQvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nL1N1YnR5cGUvVHlwZTEvVHlwZS9Gb250Pj4KZW5kb2JqCjEwIDAgb2JqCjw8L0Jhc2VGb250L0hlbHZldGljYS1Cb2xkL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZy9TdWJ0eXBlL1R5cGUxL1R5cGUvRm9udD4+CmVuZG9iagoyIDAgb2JqCjw8L0NvdW50IDEvS2lkc1s0IDAgUl0vVHlwZS9QYWdlcz4+CmVuZG9iagoxMSAwIG9iago8PC9CQm94WzAgMTEgNTkwIDQxXS9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ0L1Jlc291cmNlczw8L0ZvbnQ8PC9GMSA3IDAgUj4+Pj4vU3VidHlwZS9Gb3JtL1R5cGUvWE9iamVjdD4+c3RyZWFtCniccwrh0nczVLBUCEnjMjY00zMyUzA0VAhJ4dIw1AzJ4nIN4QrmAgCJRQdiCmVuZHN0cmVhbQplbmRvYmoKMTIgMCBvYmoKPDwvQml0c1BlckNvbXBvbmVudCA4L0NvbG9yU3BhY2VbL0luZGV4ZWQgL0RldmljZVJHQiAxNiAoXDAyMHe8////TJnNw93uh7vdaqrV8Pb7LojEXDAzN4DAPZHJlsPi4e73pczmW6LR0uXyebPZtNTqKV0vRGVjb2RlUGFybXM8PC9CaXRzUGVyQ29tcG9uZW50IDgvQ29sb3JzIDEvQ29sdW1ucyAxMDMvUHJlZGljdG9yIDE1Pj4vRmlsdGVyL0ZsYXRlRGVjb2RlL0hlaWdodCA0Mi9MZW5ndGggNjQ4L1N1YnR5cGUvSW1hZ2UvVHlwZS9YT2JqZWN0L1dpZHRoIDEwMz4+c3RyZWFtCnja7FfLluQgCE18a4z6/1/bVlcURLR6MWdOL5pVAhE/x4Ucxx/9HnLiTawwyE74g/Lw/HHYJtcgzj/nHoZX8gSSUTtix4A0Itcarz7f7fkGeVN6vV/1dVKSoxmLRBewxcNKrxs3uQV5Y5VvHfKcKT92NJb5zlboik2LP1O+P1CvF8OYwU4d2Nl26kkP8oqJRPeuptSxZhJJP+SFF9zQz16AdzXbkTNDw3bwl7WoDLDvPxJkFBJ8ZfE670UuhoZNjHZa5d4oVNh36l2ETOJqrc6R6+TRTiFlEEbfJ+8yCrzbtTAJriFZu2kJE+8E6r8tVLR8l7EVDeRLMGUQke6TSd+MSC0PNwoU5NYQ32kZJGwn+bUd0dUbnARcBnFfBrgxol3ZUb3OCq5shUKVzjVl9O3bMc3bkb0dNe4vibp9Y+YbpwgcXIqrO9Pz6TC4GAiV2NkZgtwtzQVhkfIEui3qGLUx8wCepgA3BU+jKsvw0T/SXDZ2QnM3fjAUEN/PUJJRg3EE6mwc7mTcqgxAo+HLIIpOcR5X9UM/1mg95DP001AdUAZ69s7QZrwWQ1sM3N6zFnW7Ynw3/AZQ75ROFuzymM/nfMIYJOeDlgG8adlgwVo/rxKxGd+59WeamgM3PzHRc7fb3cy2S1getwNHjLt5Fu1WN7OGy3G2ChoTOXW7+rC6xYhAxgF23Jz1wA9x9YPVrVaykSrXprpVMdzCiSBFc7vpOLMXq5tfAMXNgrWfpngL1afVLexxb97RmOX0+ry6LWYg6at7joknK9ZudSs0zqvxE5hbGr4MuNWtyn2cVusyD26t3iQYXqVXJbdndNhjeX3VQT5ZvWTQ7u+n9t8/+D/0JcAA7+kUeQplbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE2NDYgMDAwMDAgbiAKMDAwMDAwMjIwNCAwMDAwMCBuIAowMDAwMDAxNjkxIDAwMDAwIG4gCjAwMDAwMDE0NDQgMDAwMDAgbiAKMDAwMDAwMDEyOCAwMDAwMCBuIAowMDAwMDAwMDE1IDAwMDAwIG4gCjAwMDAwMDIwMTcgMDAwMDAgbiAKMDAwMDAwMTgzNiAwMDAwMCBuIAowMDAwMDAxOTI5IDAwMDAwIG4gCjAwMDAwMDIxMTAgMDAwMDAgbiAKMDAwMDAwMjI1NSAwMDAwMCBuIAowMDAwMDAyNDQyIDAwMDAwIG4gCnRyYWlsZXIKPDwvSUQgWzxhOWYyMjM4MTg4MzliMTY3ZGNiNWRjOTJlZDMwZDk1ND48YTlmMjIzODE4ODM5YjE2N2RjYjVkYzkyZWQzMGQ5NTQ+XS9JbmZvIDMgMCBSL1Jvb3QgMSAwIFIvU2l6ZSAxMz4+CiVpVGV4dC03LjAuMApzdGFydHhyZWYKMzM4OAolJUVPRgo="/>
+         </Binary>
+      </resource>
+   </entry>
+   <entry>
+      <resource>
+         <Binary xmlns="http://hl7.org/fhir">
+            <id value="doc-2"/>
+            <contentType value="text/html;charset=utf-8"/>
+            <content value="PGh0bWw+PGhlYWQ+PHRpdGxlPkFwYWNoZSBUb21jYXQgLSBFcnJvciByZXBvcnQ8L3RpdGxlPjxzdHlsZT48IS0tSDEge2ZvbnQtZmFtaWx5OlRhaG9tYSxBcmlhbCxzYW5zLXNlcmlmO2NvbG9yOndoaXRlO2JhY2tncm91bmQtY29sb3I6IzUyNUQ3Njtmb250LXNpemU6MjJweDt9IEgyIHtmb250LWZhbWlseTpUYWhvbWEsQXJpYWwsc2Fucy1zZXJpZjtjb2xvcjp3aGl0ZTtiYWNrZ3JvdW5kLWNvbG9yOiM1MjVENzY7Zm9udC1zaXplOjE2cHg7fSBIMyB7Zm9udC1mYW1pbHk6VGFob21hLEFyaWFsLHNhbnMtc2VyaWY7Y29sb3I6d2hpdGU7YmFja2dyb3VuZC1jb2xvcjojNTI1RDc2O2ZvbnQtc2l6ZToxNHB4O30gQk9EWSB7Zm9udC1mYW1pbHk6VGFob21hLEFyaWFsLHNhbnMtc2VyaWY7Y29sb3I6YmxhY2s7YmFja2dyb3VuZC1jb2xvcjp3aGl0ZTt9IEIge2ZvbnQtZmFtaWx5OlRhaG9tYSxBcmlhbCxzYW5zLXNlcmlmO2NvbG9yOndoaXRlO2JhY2tncm91bmQtY29sb3I6IzUyNUQ3Njt9IFAge2ZvbnQtZmFtaWx5OlRhaG9tYSxBcmlhbCxzYW5zLXNlcmlmO2JhY2tncm91bmQ6d2hpdGU7Y29sb3I6YmxhY2s7Zm9udC1zaXplOjEycHg7fUEge2NvbG9yIDogYmxhY2s7fUEubmFtZSB7Y29sb3IgOiBibGFjazt9SFIge2NvbG9yIDogIzUyNUQ3Njt9LS0+PC9zdHlsZT4gPC9oZWFkPjxib2R5PjxoMT5IVFRQIFN0YXR1cyA0MDQgLSA8L2gxPjxIUiBzaXplPSIxIiBub3NoYWRlPSJub3NoYWRlIj48cD48Yj50eXBlPC9iPiBTdGF0dXMgcmVwb3J0PC9wPjxwPjxiPm1lc3NhZ2U8L2I+IDx1PjwvdT48L3A+PHA+PGI+ZGVzY3JpcHRpb248L2I+IDx1PlRoZSByZXF1ZXN0ZWQgcmVzb3VyY2UgaXMgbm90IGF2YWlsYWJsZS48L3U+PC9wPjxIUiBzaXplPSIxIiBub3NoYWRlPSJub3NoYWRlIj48aDM+QXBhY2hlIFRvbWNhdDwvaDM+PC9ib2R5PjwvaHRtbD4="/>
+         </Binary>
+      </resource>
+   </entry>
+</Bundle>
