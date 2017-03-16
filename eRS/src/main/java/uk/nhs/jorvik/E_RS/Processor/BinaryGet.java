@@ -25,6 +25,10 @@ public class BinaryGet implements Processor {
 	        {
 	        	exchange.getIn().setHeader(Exchange.HTTP_QUERY, parts[2]);
 	        }
+	        if (parts.length > 3)
+	        {
+	        	exchange.getIn().setHeader("BinaryId", parts[3]);
+	        }
 	        exchange.getIn().setHeader("Accept","*/*");
 	        exchange.getIn().setBody("");
 	}

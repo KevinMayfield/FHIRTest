@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.dstu2.composite.AttachmentDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
@@ -45,21 +47,69 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 		
 		Bundle bundle = new Bundle();
 		Entry referralEntry = bundle.addEntry();
+		Integer docCount=1;
 		
 		ReferralRequest referral = parser.parseResource(ReferralRequest.class,reader);
-		String documents="Binary/$ers.generateCRI~"+referral.getId().getIdPart()+"-ReferralCRI.pdf~UBRN="+referral.getId().getIdPart()+",";
+		String documents="Binary/$ers.generateCRI~"+referral.getId().getIdPart()+"-ReferralCRI.pdf~UBRN="+referral.getId().getIdPart()+"~doc-1,";
+		
+		referral
+			.addIdentifier()
+			.setSystem("http://fhir.nhs.net/ers/ReferralRequest")
+			.setValue(referral.getId().getIdPart());
+		
+		// Create a resource for the CRI document 
+				
+		DocumentReference criDocumentReference = new DocumentReference();
+		criDocumentReference.setId("doc-1");
+		criDocumentReference.addIdentifier()
+			.setSystem("http://fhir.nhs.net/ers/Binary")
+			.setValue("UBRN-"+referral.getId().getIdPart());
+		CodeableConceptDt typeCode = new CodeableConceptDt();
+		typeCode.addCoding()
+			.setCode("25611000000107")
+			.setSystem("http://snomed.info/sct")
+			.setDisplay("Referral letter");
+		criDocumentReference.setType(typeCode);
+		criDocumentReference.setSubject(referral.getPatient());
+		criDocumentReference.setDescription("Clinical Referral Information");
+		AttachmentDt attachment = new AttachmentDt();
+		attachment
+			.setContentType("application/pdf")
+			.setTitle(referral.getId().getIdPart()+"-ReferralCRI.pdf")
+			.setUrl("Binary/doc-1");
+		
+		criDocumentReference.addContent().setAttachment(attachment);
+		
+			
+		
+		bundle.addEntry().setResource(criDocumentReference);
+		
 		for (ResourceReferenceDt support : referral.getSupportingInformation())
 		{
-			log.info("ref support = "+support.getReference().getIdPart());
+			log.debug("ref support = "+support.getReference().getIdPart());
 			for (int c=0; c<referral.getContained().getContainedResources().size();c++)
 			{
-				bundle.addEntry().setResource(referral.getContained().getContainedResources().get(c));
-				log.info("ref contained = "+referral.getContained().getContainedResources().get(c).getId().getIdPart());
-				
-				if (referral.getContained().getContainedResources().get(c).getId().getIdPart().equals(support.getReference().getIdPart()))								
+				if (referral.getContained().getContainedResources().get(c).getResourceName().equals("DocumentReference"))
 				{
-					DocumentReference docRef = (DocumentReference) referral.getContained().getContainedResources().get(c);
-					documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle()+",";
+					bundle.addEntry().setResource(referral.getContained().getContainedResources().get(c));
+					log.debug("ref contained = "+referral.getContained().getContainedResources().get(c).getId().getIdPart());
+					
+					if (referral.getContained().getContainedResources().get(c).getId().getIdPart().equals(support.getReference().getIdPart()))								
+					{
+						docCount++;
+						DocumentReference docRef = (DocumentReference) referral.getContained().getContainedResources().get(c);
+						docRef.setId("doc-"+docCount.toString());
+						docRef.setSubject(referral.getPatient());
+						docRef.setCreatedWithSecondsPrecision(docRef.getContent().get(0).getAttachment().getCreation());
+						String[] parts = docRef.getContent().get(0).getAttachment().getUrl().split("/");
+						docRef.addIdentifier()
+							.setSystem("http://fhir.nhs.net/ers/Binary")
+							.setValue(parts[1]);
+						docRef.getContent().get(0).getAttachment().setUrl("Binary/doc-"+docCount.toString());
+						support.setReference(docRef.getId().getIdPart());
+						documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle()+"~~doc-"+docCount.toString()+",";
+						
+					}
 				}
 			}
 		}
@@ -71,8 +121,7 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 		exchange.getIn().setBody(documents);
 		
 		parser = ctxhapiHL7Fhir.newJsonParser();
-		//exchange.setOut(exchange.getIn().copy());
-		//exchange.getOut().setBody(parser.encodeResourceToString(bundle).getBytes());
+		
 		exchange.setProperty("MasterBundle", parser.encodeResourceToString(bundle).getBytes());
 	}
 

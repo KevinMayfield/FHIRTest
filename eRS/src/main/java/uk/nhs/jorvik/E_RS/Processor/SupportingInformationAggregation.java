@@ -77,6 +77,7 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 			
 			Binary binary = new Binary();
 			binary.setContentType(newExchange.getIn().getHeader(Exchange.CONTENT_TYPE).toString());
+			binary.setId(newExchange.getIn().getHeader("BinaryId").toString());
 			// This appears to work but not convinced it's valid base64
 			binary.setContent(buffer.toString().getBytes());
 			
