@@ -25,6 +25,7 @@ public class FHIRRoute extends RouteBuilder {
 				}
 			})
 			.to("file:C://test//Patient")
+			.to("mock:EndpointFHIRPatient")
 			.to("http://163.160.104.110:8080/hapi-fhir-jpaserver/baseStu3?throwExceptionOnFailure=false&connectionsPerRoute=60")
 			.to("log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO");
 		
@@ -41,6 +42,7 @@ public class FHIRRoute extends RouteBuilder {
 				}
 			})
 			.to("http://163.160.104.110:8080/hapi-fhir-jpaserver/baseStu3?throwExceptionOnFailure=false&connectionsPerRoute=60")
+			.to("mock:EndpointFHIRPatient")
 			.to("file:C://test//Patient")
 			.to("log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO");
   	}

@@ -45,7 +45,7 @@ public class CareConnectPatientTest  {
 	 @Produce(uri = "direct:startFHIRPatientV2")
      protected ProducerTemplate templateFHIRPatientV2;
 	 
-	 @EndpointInject(uri = "mock:log:uk.nhs.jorvik.fhirTest.javaconfig.IntegrationTestPatient?showAll=true&multiline=true&level=INFO")
+	 @EndpointInject(uri = "mock:EndpointFHIRPatient")
 	 protected MockEndpoint resultEndpointFHIRPatient;
 		 
 	 private static final Logger log = LoggerFactory.getLogger(CareConnectPatientTest.class);
