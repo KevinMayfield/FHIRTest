@@ -16,7 +16,7 @@ public class BinaryGet implements Processor {
 	        String[] parts = payload.split("~");
 	        exchange.getIn().setHeader(Exchange.HTTP_PATH, parts[0]);
 	        exchange.getIn().setHeader(Exchange.HTTP_METHOD, "GET");
-	        exchange.getIn().setHeader("FileRef",parts[1].replace("/","-"));
+	        exchange.getIn().setHeader("FileRef","5-BinaryGet-"+parts[1].replace("/","-"));
 	        if (parts.length < 3)
 	        {
 	        	exchange.getIn().setHeader(Exchange.HTTP_QUERY, "");

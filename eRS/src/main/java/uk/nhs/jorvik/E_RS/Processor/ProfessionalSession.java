@@ -57,6 +57,7 @@ public class ProfessionalSession implements Processor {
 			exchange.getIn().setHeader(Exchange.HTTP_QUERY,"");
 			exchange.getIn().setHeader("XAPI_ASID","999000000045");
 			exchange.getIn().setHeader("XAPI_FQDN","all.bjss.com");
+			exchange.getIn().setHeader("FileRef","2-ProfessionalSessionPut.json");
 			exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
 		
         exchange.getIn().setBody(jsonObject.toString());

@@ -24,8 +24,8 @@ public class eRSTest  {
 	 @Produce(uri = "direct:startTestWorkflow")
      protected ProducerTemplate templateStartTestWorkflow;
 		 
-	 @EndpointInject(uri = "mock:Logon")
-	 protected MockEndpoint resultLogon;
+	 @EndpointInject(uri = "mock:resultProfessionalSessionPost")
+	 protected MockEndpoint resultEndpointProfessionalSessionPost;
 	 
 	 @EndpointInject(uri = "mock:resultProfessionalSessionPut")
 	 protected MockEndpoint resultEndpointProfessionalSessionPut;
@@ -55,8 +55,8 @@ public class eRSTest  {
 	        
 			templateStartTestWorkflow.sendBody("direct:startTestWorkflow",request);
 	        
-	        resultLogon.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 
-	        resultLogon.assertIsSatisfied();
+			resultEndpointProfessionalSessionPost.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 
+			resultEndpointProfessionalSessionPost.assertIsSatisfied();
 	        
 	        
 	        resultReferralRequestFetchWorklist.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 200); 

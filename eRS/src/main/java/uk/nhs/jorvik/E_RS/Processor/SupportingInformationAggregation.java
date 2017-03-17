@@ -38,6 +38,7 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 			log.info("Empty exchange - "+ newExchange.getIn().getHeader("UBRN"));
 			bundle = new Bundle();
 			oldExchange = newExchange.copy();
+			oldExchange.getIn().setHeader("FileRef", "6-BundleReferralRequest-"+oldExchange.getIn().getHeader("UBRN")+".xml");
 			// Referral Bundle has been stored as a copy
 			Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) oldExchange.getProperty("MasterBundle")));
 			IParser parser = ctxhapiHL7Fhir.newJsonParser();
@@ -88,6 +89,7 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 		{
 		
 		}
+		
 		oldExchange.getIn().setBody(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(bundle).getBytes());
 		
 		return oldExchange;

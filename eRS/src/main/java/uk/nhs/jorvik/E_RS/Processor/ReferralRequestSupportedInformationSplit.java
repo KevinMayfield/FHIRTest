@@ -105,9 +105,11 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 						docRef.addIdentifier()
 							.setSystem("http://fhir.nhs.net/ers/Binary")
 							.setValue(parts[1]);
+						documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle()+"~~doc-"+docCount.toString()+",";
+						// Now amend the Referral Request with the new references
 						docRef.getContent().get(0).getAttachment().setUrl("Binary/doc-"+docCount.toString());
 						support.setReference(docRef.getId().getIdPart());
-						documents = documents + docRef.getContent().get(0).getAttachment().getUrl()+"~"+referral.getId().getIdPart()+"-"+docRef.getContent().get(0).getAttachment().getTitle()+"~~doc-"+docCount.toString()+",";
+						
 						
 					}
 				}
