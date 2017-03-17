@@ -7,20 +7,18 @@ import java.io.Reader;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Binary;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.parser.IParser;
-import uk.nhs.jorvik.fhirTest.E_RS.eRSTest;
 
 public class SupportingInformationAggregation implements AggregationStrategy {
 
 	private FhirContext ctxhapiHL7Fhir;
 	
-	private static final Logger log = LoggerFactory.getLogger(eRSTest.class);
+
 	
 	public SupportingInformationAggregation(FhirContext ctxhapiHL7Fhir)
 	{
@@ -35,10 +33,10 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 		
 		if (oldExchange == null)
 		{
-			log.info("Empty exchange - "+ newExchange.getIn().getHeader("UBRN"));
 			bundle = new Bundle();
 			oldExchange = newExchange.copy();
 			oldExchange.getIn().setHeader("FileRef", "6-BundleReferralRequest-"+oldExchange.getIn().getHeader("UBRN")+".xml");
+			oldExchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/fhir+xml");
 			// Referral Bundle has been stored as a copy
 			Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) oldExchange.getProperty("MasterBundle")));
 			IParser parser = ctxhapiHL7Fhir.newJsonParser();
@@ -49,7 +47,6 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 		{
 			try
 			{
-				log.info("Non Empty exchange- "+ newExchange.getIn().getHeader("UBRN"));
 				Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) oldExchange.getIn().getBody(byte[].class)));
 				IParser parser = ctxhapiHL7Fhir.newXmlParser();
 				

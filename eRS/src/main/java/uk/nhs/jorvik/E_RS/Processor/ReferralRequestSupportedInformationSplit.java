@@ -7,8 +7,7 @@ import java.io.Reader;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.composite.AttachmentDt;
@@ -19,13 +18,11 @@ import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
 import ca.uhn.fhir.model.dstu2.resource.DocumentReference;
 import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
 import ca.uhn.fhir.parser.IParser;
-import uk.nhs.jorvik.fhirTest.E_RS.eRSTest;
 
 public class ReferralRequestSupportedInformationSplit implements Processor {
 
 	private FhirContext ctxhapiHL7Fhir;
 	
-	private static final Logger log = LoggerFactory.getLogger(eRSTest.class);
 	
 	public ReferralRequestSupportedInformationSplit(FhirContext ctxhapiHL7Fhir)
 	{
@@ -86,13 +83,13 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 		
 		for (ResourceReferenceDt support : referral.getSupportingInformation())
 		{
-			log.debug("ref support = "+support.getReference().getIdPart());
+	
 			for (int c=0; c<referral.getContained().getContainedResources().size();c++)
 			{
 				if (referral.getContained().getContainedResources().get(c).getResourceName().equals("DocumentReference"))
 				{
 					bundle.addEntry().setResource(referral.getContained().getContainedResources().get(c));
-					log.debug("ref contained = "+referral.getContained().getContainedResources().get(c).getId().getIdPart());
+	
 					
 					if (referral.getContained().getContainedResources().get(c).getId().getIdPart().equals(support.getReference().getIdPart()))								
 					{

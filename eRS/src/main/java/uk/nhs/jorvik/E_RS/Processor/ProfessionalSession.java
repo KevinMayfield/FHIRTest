@@ -8,15 +8,12 @@ import java.io.Reader;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import uk.nhs.jorvik.fhirTest.E_RS.eRSTest;
 
 
 public class ProfessionalSession implements Processor {
 
-	private static final Logger log = LoggerFactory.getLogger(eRSTest.class);
+	
 	 
 	@Override
 	public void process(Exchange exchange) throws Exception {
@@ -36,7 +33,7 @@ public class ProfessionalSession implements Processor {
 	      
 	      JSONObject jsonObject = new JSONObject(jsonString);
 	     
-	      log.debug("Id = "+jsonObject.getString("id"));
+	
 	     // assertNotNull("Session Id",jsonObject.getString("id") );
 	      
 	      // Change the permission object, to request a permission
@@ -47,7 +44,7 @@ public class ProfessionalSession implements Processor {
 	      		.put("orgName","BTL NHS TRUST R69");
 	      jsonObject.put("permission", permission);
 	      
-	      log.debug("Amended string = "+jsonObject.toString());
+	
         
         // Now request the permission.
         
