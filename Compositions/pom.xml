@@ -4,8 +4,8 @@
   <artifactId>CareConnectComposition</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   	<properties>
-   		<camel-version>2.18.2</camel-version>
-	    <hapi-fhir-version>2.2</hapi-fhir-version>
+   		<camel-version>2.18.3</camel-version>
+	    <hapi-fhir-version>2.3</hapi-fhir-version>
 	    <hapi-v2-version>2.2</hapi-v2-version>
 	    <slf4j-version>1.7.5</slf4j-version>
 	    <junit-version>4.12</junit-version>

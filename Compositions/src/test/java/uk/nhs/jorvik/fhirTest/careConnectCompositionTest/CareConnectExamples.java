@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
-import org.hl7.fhir.dstu3.model.AllergyIntolerance.AllergyIntoleranceCertainty;
+
 import org.hl7.fhir.dstu3.model.Bundle.BundleType;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -153,7 +153,7 @@ public final class CareConnectExamples {
 			.setDisplay("Polyurethane fumes (substance)");
 		allergy.addReaction()
 			.setSubstance(substanceCode)
-			.setCertainty(AllergyIntoleranceCertainty.LIKELY)
+			//.setCertainty(new AllergyIntoleranceReactionComponent().se)
 			.setDescription("Came out with a severe rash after the Garforth Velo Club peloton passed by the Podgers.");
 		
 		listAllergyIntolerance.add(allergy);
