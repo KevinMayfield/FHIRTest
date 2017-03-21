@@ -36,13 +36,7 @@
       		<artifactId>camel-spring-javaconfig</artifactId>
       		<version>${camel-version}</version>
     	</dependency>	
-		
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http</artifactId>
-			<version>${camel-version}</version>
-	    </dependency>
-	    <dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-http4</artifactId>
 			<version>${camel-version}</version>
@@ -76,6 +70,11 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		    <version>3.1</version>
+		</dependency>
 	    <!-- HL7 HAPI FHIR -->
 	    
 	    <dependency>

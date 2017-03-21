@@ -48,11 +48,8 @@ public class eRSTest  {
 	  @Test
 	  public void testGetReferrals() throws Exception 
 	  {
-			String request = "{"
-	    					+" \"typeInfo\": \"uk.nhs.ers.xapi.dto.v1.session.ProfessionalSession\" ,"
-	    					+" \"token\": \"021600556514 x x x\" "
-	  						+" }";
-	        
+			String request = "";
+	    	
 			templateStartTestWorkflow.sendBody("direct:startTestWorkflow",request);
 	        
 			resultEndpointProfessionalSessionPost.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, 201); 

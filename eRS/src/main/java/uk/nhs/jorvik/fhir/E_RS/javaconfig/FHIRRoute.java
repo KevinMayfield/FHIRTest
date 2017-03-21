@@ -3,11 +3,21 @@ package uk.nhs.jorvik.fhir.E_RS.javaconfig;
 
 import java.io.InputStream;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.http4.HttpComponent;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.model.rest.RestParamType;
+import org.apache.camel.util.jsse.KeyManagersParameters;
+import org.apache.camel.util.jsse.KeyStoreParameters;
+import org.apache.camel.util.jsse.SSLContextParameters;
+import org.apache.camel.util.jsse.TrustManagersParameters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.gemplus.gemauth.api.GATicket;
@@ -21,39 +31,45 @@ import uk.nhs.jorvik.E_RS.Processor.WorkFlowGet;
 import uk.nhs.jorvik.E_RS.Processor.WorkFlowReferralSplit;
 
 
-
 @Component
+@PropertySource("classpath:ERS.properties")
 public class FHIRRoute extends RouteBuilder {
 	
+	@Autowired
+	protected Environment env;
+	
 	private static final FhirContext ctxhapiHL7Fhir = FhirContext.forDstu2();
+	
+	String ssoTicket = null;
+	
 	@Override
 	public void configure() throws Exception {
 		
 		// Simple connection to smartcard to ensure the user has been authenticated
 		
 		GATicket gaticket = null;
-		String ssoTicket = null;
-		Long ssoTicketCode = null;
+		
+		
 	    try {
 	      log.info("TEST - MAIN: Starting.");
 	      gaticket = new GATicket();
 	      gaticket.setIsDebug(true);
 	      ssoTicket = gaticket.getTicket();
 	      log.info(("TEST - MAIN: GATicket -> " + ssoTicket));
-	      ssoTicketCode = gaticket.getLastError();
+	      Long ssoTicketCode = gaticket.getLastError();
 	    }
 	    catch (Throwable err) {
 	      err.printStackTrace();
 	      if (null!=gaticket)
 	    	  log.info(("error code: " + gaticket.getLastError()));
 	    }
-	    gaticket.getErrorDescription(ssoTicketCode);
-		
+	    		
 	    // So this url should work 
 	    // http://localhost:8181/eRS/dstu2/ReferralRequest/000000090007
 	    // http://localhost:8181/eRS/dstu2/ReferralRequest?_id=000000090007&_revinclude=*
 	    
-	    
+	    Endpoint httpsEndpoint = setupSSLConext(getContext());  
+	   	    
 	    restConfiguration()
 			.component("jetty")
 			.bindingMode(RestBindingMode.off)
@@ -132,10 +148,8 @@ public class FHIRRoute extends RouteBuilder {
 			// The response from the referral request is split into separate messages - no combination back
 			.split(body().tokenize(","))
 				.to("direct:ReferralRequestGet")
-				.to("direct:RIE")
 				// Output results
-				.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${in.header.breadcrumbId}-${in.header.FileRef}")
-				.to("mock:resultAggregatedDocuments")
+				.to("direct:PostBundleReferralRequest")
 			.end();
 			
 		
@@ -147,14 +161,13 @@ public class FHIRRoute extends RouteBuilder {
 					exchange.getIn().setHeader(Exchange.HTTP_PATH,"ProfessionalSession");
 					exchange.getIn().setHeader(Exchange.HTTP_METHOD, "POST");
 					exchange.getIn().setHeader(Exchange.HTTP_QUERY,"");
-					exchange.getIn().setHeader("XAPI_ASID","999000000045");
-					exchange.getIn().setHeader("XAPI_FQDN","all.bjss.com");
+					exchange.getIn().setHeader("XAPI_ASID",env.getProperty("ASID"));
+					exchange.getIn().setHeader("XAPI_FQDN",env.getProperty("FQDN"));
 					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
 					exchange.getIn().setHeader("FileRef","1-ProfessionalSessionPost.json");
-					String request = "{"
-	    					+" \"typeInfo\": \"uk.nhs.ers.xapi.dto.v1.session.ProfessionalSession\" ,"
-	    					+" \"token\": \"021600556514 x x x\" "
-	  						+" }";
+					exchange.getIn().setHeader("token", getToken());
+					String request = getRequest(exchange);
+									
 					exchange.getIn().setBody(request);
 				}
 			})
@@ -205,29 +218,85 @@ public class FHIRRoute extends RouteBuilder {
 				.to("mock:resultBinaryGet")
 			.end();
 			
-			
-		
 		from("direct:eRSCall")
 			.routeId("eRS Call")
-			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PreHttp?showAll=true&multiline=true&level=DEBUG")
-			.to("http://api-ers.spine2.ncrs.nhs.uk:88/ers-external-service/v1/?throwExceptionOnFailure=false&connectionsPerRoute=60&bridgeEndpoint=true")
-			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PostHttp?showAll=true&multiline=true&level=DEBUG")
-			.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${in.header.breadcrumbId}-${in.header.FileRef}");
+			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PreHttp?showAll=true&multiline=true&level=INFO")
+			.to(httpsEndpoint)
+			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PostHttp?showAll=true&multiline=true&level=INFO")
+			.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${id}-${in.header.FileRef}");
 			// only include file for debug. 
 		
 		from("direct:PostBundleReferralRequest")
 			.routeId("PostBundleReferralRequest")
-			.to("file:C://test//e-RS//output?fileName=$simple{date:now:yyyyMMdd}-${in.header.breadcrumbId}-ReferralRequestBundle-${in.header.UBRN}.xml");
-	
-		from("direct:RIE")
-			.routeId("Outbound RIE")
 			.process(new Processor() {
 			    public void process(Exchange exchange) throws Exception {
 			        exchange.getIn().setHeader(Exchange.HTTP_PATH, "ReferralRequest");
 			        exchange.getIn().setHeader(Exchange.HTTP_METHOD, "POST");
 			    }})
-			.to("http://rie-test:20105/fhirbase?throwExceptionOnFailure=false&bridgeEndpoint=true");
+			.to(env.getProperty("tie.endpoint"))
+			.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${id}-${in.header.FileRef}")
+			.to("mock:resultAggregatedDocuments");
+		
   	}
 	
+	private String getToken()
+	{
+		String token = null;
+	
+		if (env.getProperty("secure").equals("true"))
+		{
+			token = ssoTicket;
+		}
+		else
+		{
+			token = env.getProperty("token");
+		}
+		return token;
+	}
+	
+	private String getRequest(Exchange exchange)
+	{
+		String request = "{"
+					+" \"typeInfo\": \"uk.nhs.ers.xapi.dto.v1.session.ProfessionalSession\" ,"
+					//
+					+" \"token\": \""+exchange.getIn().getHeader("token").toString()+"\" "
+						+" }";
+		return request;
+	}
+	
+	private Endpoint setupSSLConext(CamelContext camelContext) throws Exception {
+		HttpComponent httpComponent = null; 
+		if (env.getProperty("secure").equals("true"))
+		{
+	        KeyStoreParameters keyStoreParameters = new KeyStoreParameters();
+	        // Change this path to point to your truststore/keystore as jks files
+	        keyStoreParameters.setResource(env.getProperty("keystore.resource"));
+	        keyStoreParameters.setPassword(env.getProperty("keystore.password"));
+	
+	        KeyManagersParameters keyManagersParameters = new KeyManagersParameters();
+	        keyManagersParameters.setKeyStore(keyStoreParameters);
+	        keyManagersParameters.setKeyPassword(env.getProperty("keymanager.password"));
+	
+	        TrustManagersParameters trustManagersParameters = new TrustManagersParameters();
+	        trustManagersParameters.setKeyStore(keyStoreParameters);
+	
+	        SSLContextParameters sslContextParameters = new SSLContextParameters();
+	        sslContextParameters.setKeyManagers(keyManagersParameters);
+	        sslContextParameters.setTrustManagers(trustManagersParameters);
+	
+	        httpComponent = camelContext.getComponent("https4", HttpComponent.class);
+	        httpComponent.setSslContextParameters(sslContextParameters);
+	        //This is important to make your cert skip CN/Hostname checks
+	       // httpComponent.setX509HostnameVerifier(new AllowAllHostnameVerifier());
+		}
+        else
+        {
+        	httpComponent = camelContext.getComponent("http4", HttpComponent.class);
+	        
+        }
+
+        return httpComponent.createEndpoint(env.getProperty("ers.endpoint"));
+      
+    }
 	
 }
