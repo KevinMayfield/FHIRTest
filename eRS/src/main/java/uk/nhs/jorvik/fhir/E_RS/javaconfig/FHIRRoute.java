@@ -1,7 +1,10 @@
 package uk.nhs.jorvik.fhir.E_RS.javaconfig;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
@@ -23,6 +26,11 @@ import org.springframework.stereotype.Component;
 import com.gemplus.gemauth.api.GATicket;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
+import ca.uhn.fhir.model.dstu2.resource.ValueSet;
+import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
+import ca.uhn.fhir.parser.IParser;
 import uk.nhs.jorvik.E_RS.Processor.SupportingInformationAggregation;
 import uk.nhs.jorvik.E_RS.Processor.BinaryGet;
 import uk.nhs.jorvik.E_RS.Processor.ReferralRequestSupportedInformationSplit;
@@ -109,6 +117,11 @@ public class FHIRRoute extends RouteBuilder {
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS Binary Get")
+					.process(new Processor() {
+				        public void process(Exchange exchange) throws Exception {
+				            exchange.getIn().setHeader(Exchange.HTTP_PATH, "Binary/"+exchange.getIn().getHeader("attachmentId"));
+				        }
+					})
 					.to("direct:eRSCall")
 					.process(new Processor() {
 					    public void process(Exchange exchange) throws Exception {
@@ -121,6 +134,7 @@ public class FHIRRoute extends RouteBuilder {
 	    	.get("/{version}/Valueset/{valueSetId}")
 		    	.description("eRS ValueSet Get")
 		    	.param().type(RestParamType.path).name("valueSetId").required(true).description("Attachment Id").dataType("string").endParam()
+		    	.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ValueSet Get")
@@ -136,12 +150,22 @@ public class FHIRRoute extends RouteBuilder {
 					    	// We reset the stream - only needed following a file output operation. This process can be removed if not using it.
 					    	InputStream is = (InputStream) exchange.getIn().getBody();
 						    is.reset();
+						    if ((exchange.getIn().getHeader("_format") != null) && (exchange.getIn().getHeader("_format").toString().contains("xml")))
+					        {
+					        	Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
+					    		IParser parser = ctxhapiHL7Fhir.newJsonParser();
+					    		
+					    		ValueSet valueSet = parser.parseResource(ValueSet.class,reader);
+					    		exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/xml+fhir");
+					    		exchange.getIn().setBody(new ByteArrayInputStream(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(valueSet).getBytes()));
+					        }
 					    }})
 					.to("mock:resultValueSetGet")
 				.endRest()
 	    	.get("/{version}/ReferralRequest/{_id}")
 				.description("Interface to retrieve Referral")
 				.param().type(RestParamType.path).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
+				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Get")
@@ -157,6 +181,7 @@ public class FHIRRoute extends RouteBuilder {
 				.param().type(RestParamType.query).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
 				.param().type(RestParamType.query).name("_revinclude").required(false).description("Include referenced resources ").dataType("string").endParam()
 				.param().type(RestParamType.query).name("status").required(false).description("Defaults to request and is hard coded  ").dataType("string").endParam()
+				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Search")
@@ -258,9 +283,25 @@ public class FHIRRoute extends RouteBuilder {
 			        exchange.getIn().setHeader(Exchange.HTTP_METHOD, "GET");
 			        exchange.getIn().setHeader("FileRef","4-ReferralRequestGet-"+part[1]+".json");
 			        exchange.getIn().setBody("");
+			        
 			    }})
 			.to("direct:eRSCall")
 			.to("mock:resultReferralRequestGet")
+			.process(new Processor() {
+				// Move out to own class?
+			    public void process(Exchange exchange) throws Exception {
+			        if ((exchange.getIn().getHeader("_format") != null) && (exchange.getIn().getHeader("_format").toString().contains("xml")))
+			        {
+			        	InputStream is = (InputStream) exchange.getIn().getBody();
+			    		is.reset();
+			    		Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
+			    		IParser parser = ctxhapiHL7Fhir.newJsonParser();
+			    		
+			    		ReferralRequest referral = parser.parseResource(ReferralRequest.class,reader);
+			    		exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/xml+fhir");
+			    		exchange.getIn().setBody(new ByteArrayInputStream(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(referral).getBytes()));
+			        }
+			    }})
 			.choice()
 				.when(header("_revinclude").isNotNull())
 					.to("direct:GetAttachedDocuments")

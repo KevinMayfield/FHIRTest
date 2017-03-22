@@ -12,6 +12,7 @@ import org.apache.camel.processor.aggregate.AggregationStrategy;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Binary;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
 import ca.uhn.fhir.parser.IParser;
 
 public class SupportingInformationAggregation implements AggregationStrategy {
@@ -48,8 +49,15 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 			try
 			{
 				Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) oldExchange.getIn().getBody(byte[].class)));
-				IParser parser = ctxhapiHL7Fhir.newXmlParser();
-				
+				IParser parser = null;
+				if (oldExchange.getIn().getHeader(Exchange.CONTENT_TYPE).toString().contains("json"))
+				{
+					parser = ctxhapiHL7Fhir.newJsonParser();
+				}
+				else
+				{
+					parser = ctxhapiHL7Fhir.newXmlParser();
+				}
 				bundle = parser.parseResource(Bundle.class,reader);
 			}
 			catch(Exception ex)
@@ -84,10 +92,17 @@ public class SupportingInformationAggregation implements AggregationStrategy {
 		}
 		catch (Exception ex)
 		{
-		
+			ex.printStackTrace();
 		}
-		
-		oldExchange.getIn().setBody(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(bundle).getBytes());
+		 if ((oldExchange.getIn().getHeader("_format") != null) && (oldExchange.getIn().getHeader("_format").toString().contains("json")))
+	        {
+	        	oldExchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/json+fhir");
+	        	oldExchange.getIn().setBody(ctxhapiHL7Fhir.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle).getBytes());
+	        }
+		 else
+		 {
+			 oldExchange.getIn().setBody(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(bundle).getBytes());
+		 }
 		
 		return oldExchange;
 	}

@@ -36,7 +36,15 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 		InputStream is = (InputStream) exchange.getIn().getBody();
 		is.reset();
 		Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
-		IParser parser = ctxhapiHL7Fhir.newJsonParser();
+		IParser parser = null;
+		if (exchange.getIn().getHeader(Exchange.CONTENT_TYPE) != null && exchange.getIn().getHeader(Exchange.CONTENT_TYPE).toString().contains("xml"))
+		{
+			parser = ctxhapiHL7Fhir.newXmlParser();	
+		}
+		else
+		{
+			parser = ctxhapiHL7Fhir.newJsonParser();
+		}
 		
 		// Build a simple list of documents to retrieve
 		
@@ -118,9 +126,7 @@ public class ReferralRequestSupportedInformationSplit implements Processor {
 				
 		exchange.getIn().setHeader("UBRN",referral.getId().getIdPart() );
 		exchange.getIn().setBody(documents);
-		
 		parser = ctxhapiHL7Fhir.newJsonParser();
-		
 		exchange.setProperty("MasterBundle", parser.encodeResourceToString(bundle).getBytes());
 	}
 
