@@ -26,15 +26,14 @@ import org.springframework.stereotype.Component;
 import com.gemplus.gemauth.api.GATicket;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
-import ca.uhn.fhir.model.dstu2.resource.ValueSet;
-import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
-import ca.uhn.fhir.parser.IParser;
 import uk.nhs.jorvik.E_RS.Processor.SupportingInformationAggregation;
+import uk.nhs.jorvik.E_RS.Processor.ValueSetProcessor;
 import uk.nhs.jorvik.E_RS.Processor.BinaryGet;
+import uk.nhs.jorvik.E_RS.Processor.Logoff;
+import uk.nhs.jorvik.E_RS.Processor.Logon;
 import uk.nhs.jorvik.E_RS.Processor.ReferralRequestSupportedInformationSplit;
 import uk.nhs.jorvik.E_RS.Processor.ProfessionalSession;
+import uk.nhs.jorvik.E_RS.Processor.ReferralRequestPost;
 import uk.nhs.jorvik.E_RS.Processor.WorkFlowGet;
 import uk.nhs.jorvik.E_RS.Processor.WorkFlowReferralSplit;
 
@@ -91,6 +90,10 @@ public class FHIRRoute extends RouteBuilder {
 		WorkFlowReferralSplit workFlowReferralSplit = new WorkFlowReferralSplit();
 		ReferralRequestSupportedInformationSplit binaryGetSplit = new ReferralRequestSupportedInformationSplit(ctxhapiHL7Fhir);
 		BinaryGet binaryGet = new BinaryGet();
+		Logon logon = new Logon(env, ssoTicket);
+		Logoff logoff = new Logoff(env);
+		ReferralRequestPost referralRequestPost = new ReferralRequestPost(ctxhapiHL7Fhir);
+		ValueSetProcessor valueSetProcessor = new ValueSetProcessor(ctxhapiHL7Fhir);
 		
 		SupportingInformationAggregation binaryAggregation = new SupportingInformationAggregation(ctxhapiHL7Fhir);
 	
@@ -145,21 +148,7 @@ public class FHIRRoute extends RouteBuilder {
 				        }
 					})
 					.to("direct:eRSCall")
-					.process(new Processor() {
-					    public void process(Exchange exchange) throws Exception {
-					    	// We reset the stream - only needed following a file output operation. This process can be removed if not using it.
-					    	InputStream is = (InputStream) exchange.getIn().getBody();
-						    is.reset();
-						    if ((exchange.getIn().getHeader("_format") != null) && (exchange.getIn().getHeader("_format").toString().contains("xml")))
-					        {
-					        	Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
-					    		IParser parser = ctxhapiHL7Fhir.newJsonParser();
-					    		
-					    		ValueSet valueSet = parser.parseResource(ValueSet.class,reader);
-					    		exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/xml+fhir");
-					    		exchange.getIn().setBody(new ByteArrayInputStream(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(valueSet).getBytes()));
-					        }
-					    }})
+					.process(valueSetProcessor)
 					.to("mock:resultValueSetGet")
 				.endRest()
 	    	.get("/{version}/ReferralRequest/{_id}")
@@ -231,22 +220,7 @@ public class FHIRRoute extends RouteBuilder {
 		// Calls eRS to establish a session
 		from("direct:Logon")
 			.routeId("eRS Logon")
-			.process(new Processor() {
-				public void process(Exchange exchange) throws Exception {
-					exchange.getIn().removeHeaders("*","_id|version|_revinclude|status");
-					exchange.getIn().setHeader(Exchange.HTTP_PATH,"ProfessionalSession");
-					exchange.getIn().setHeader(Exchange.HTTP_METHOD, "POST");
-					exchange.getIn().setHeader(Exchange.HTTP_QUERY,"");
-					exchange.getIn().setHeader("XAPI_ASID",env.getProperty("ASID"));
-					exchange.getIn().setHeader("XAPI_FQDN",env.getProperty("FQDN"));
-					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
-					exchange.getIn().setHeader("FileRef","1-ProfessionalSessionPost.json");
-					//exchange.getIn().setHeader("token", );
-					String request = getRequest(getToken());
-									
-					exchange.getIn().setBody(request);
-				}
-			})
+			.process(logon)
 			.to("direct:eRSCall")
 			.to("mock:resultProfessionalSessionPost")
 			// Amend the message to add permission request
@@ -256,18 +230,7 @@ public class FHIRRoute extends RouteBuilder {
 			
 		from("direct:Logoff")
 			.routeId("eRS Logoff")
-			.process(new Processor() {
-				public void process(Exchange exchange) throws Exception {
-					exchange.getIn().setHeader(Exchange.HTTP_PATH,"ProfessionalSession/"+exchange.getIn().getHeader("HTTP_X_SESSION_KEY"));
-					exchange.getIn().setHeader(Exchange.HTTP_METHOD, "DELETE");
-					exchange.getIn().setHeader(Exchange.HTTP_QUERY,"");
-					exchange.getIn().setHeader("XAPI_ASID",env.getProperty("ASID"));
-					exchange.getIn().setHeader("XAPI_FQDN",env.getProperty("FQDN"));
-					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
-					exchange.getIn().setHeader("FileRef","10-ProfessionalSessionDelete.json");
-					exchange.getIn().setBody("");
-				}
-			})
+			.process(logoff)
 			.to("direct:eRSCall")
 			.to("mock:resultProfessionalSessionDelete");
 			// Add in a FHIR Operationoutcome. Currently returns a null body
@@ -287,21 +250,7 @@ public class FHIRRoute extends RouteBuilder {
 			    }})
 			.to("direct:eRSCall")
 			.to("mock:resultReferralRequestGet")
-			.process(new Processor() {
-				// Move out to own class?
-			    public void process(Exchange exchange) throws Exception {
-			        if ((exchange.getIn().getHeader("_format") != null) && (exchange.getIn().getHeader("_format").toString().contains("xml")))
-			        {
-			        	InputStream is = (InputStream) exchange.getIn().getBody();
-			    		is.reset();
-			    		Reader reader = new InputStreamReader(new ByteArrayInputStream ((byte[]) exchange.getIn().getBody(byte[].class)));
-			    		IParser parser = ctxhapiHL7Fhir.newJsonParser();
-			    		
-			    		ReferralRequest referral = parser.parseResource(ReferralRequest.class,reader);
-			    		exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/xml+fhir");
-			    		exchange.getIn().setBody(new ByteArrayInputStream(ctxhapiHL7Fhir.newXmlParser().setPrettyPrint(true).encodeResourceToString(referral).getBytes()));
-			        }
-			    }})
+			.process(referralRequestPost)
 			.choice()
 				.when(header("_revinclude").isNotNull())
 					.to("direct:GetAttachedDocuments")
@@ -356,30 +305,8 @@ public class FHIRRoute extends RouteBuilder {
 		
   	}
 	
-	private String getToken()
-	{
-		String token = null;
+
 	
-		if (env.getProperty("secure").equals("true"))
-		{
-			token = ssoTicket;
-		}
-		else
-		{
-			token = env.getProperty("token");
-		}
-		return token;
-	}
-	
-	private String getRequest(String token)
-	{
-		String request = "{"
-					+" \"typeInfo\": \"uk.nhs.ers.xapi.dto.v1.session.ProfessionalSession\" ,"
-					//
-					+" \"token\": \""+token+"\" "
-						+" }";
-		return request;
-	}
 	
 	private Endpoint setupSSLConext(CamelContext camelContext) throws Exception {
 		HttpComponent httpComponent = null; 

@@ -12,7 +12,6 @@ import org.apache.camel.processor.aggregate.AggregationStrategy;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Binary;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
 import ca.uhn.fhir.parser.IParser;
 
 public class SupportingInformationAggregation implements AggregationStrategy {
