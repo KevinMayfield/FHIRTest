@@ -88,13 +88,63 @@ public class FHIRRoute extends RouteBuilder {
 	
 		 rest("/")
 	    	.description("eRS")
+	    	.get("/{version}/Logon")
+		    	.description("Interface to logon to eRS")
+				.responseMessage().code(200).message("OK").endResponseMessage()
+				.route()
+					.routeId("eRS Logon Get")
+					.to("direct:Logon")
+				.endRest()
+	    	.delete("/{version}/Logoff")
+		    	.description("Interface to logoff eRS")
+				.responseMessage().code(200).message("OK").endResponseMessage()
+				.route()
+					.routeId("eRS Logoff Get")
+					.to("direct:Logoff")
+				.endRest()
+	    	.get("/{version}/Binary/{attachmentId}")
+		    	.description("eRS Binary Get")
+		    	.param().type(RestParamType.path).name("attachmentId").required(true).description("Attachment Id").dataType("string").endParam()
+		    	.param().type(RestParamType.query).name("UBRN").required(false).description("UBRN").dataType("string").endParam()
+				.responseMessage().code(200).message("OK").endResponseMessage()
+				.route()
+					.routeId("eRS Binary Get")
+					.to("direct:eRSCall")
+					.process(new Processor() {
+					    public void process(Exchange exchange) throws Exception {
+					    	// We reset the stream - only needed following a file output operation. This process can be removed if not using it.
+					    	InputStream is = (InputStream) exchange.getIn().getBody();
+						    is.reset();
+					    }})
+					.to("mock:resultBinaryGet")
+				.endRest()
+	    	.get("/{version}/Valueset/{valueSetId}")
+		    	.description("eRS ValueSet Get")
+		    	.param().type(RestParamType.path).name("valueSetId").required(true).description("Attachment Id").dataType("string").endParam()
+				.responseMessage().code(200).message("OK").endResponseMessage()
+				.route()
+					.routeId("eRS ValueSet Get")
+					.process(new Processor() {
+				        public void process(Exchange exchange) throws Exception {
+				            exchange.getIn().setHeader(Exchange.HTTP_PATH, "ValueSet/"+exchange.getIn().getHeader("valueSetId"));
+				            exchange.getIn().setHeader("FileRef","9-ValueSet.json");
+				        }
+					})
+					.to("direct:eRSCall")
+					.process(new Processor() {
+					    public void process(Exchange exchange) throws Exception {
+					    	// We reset the stream - only needed following a file output operation. This process can be removed if not using it.
+					    	InputStream is = (InputStream) exchange.getIn().getBody();
+						    is.reset();
+					    }})
+					.to("mock:resultValueSetGet")
+				.endRest()
 	    	.get("/{version}/ReferralRequest/{_id}")
-				.description("Interface to query the eRS")
+				.description("Interface to retrieve Referral")
 				.param().type(RestParamType.path).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Get")
-					.to("direct:Logon")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
 				            exchange.getIn().setBody("ReferralRequest/"+exchange.getIn().getHeader("_id"));
@@ -110,7 +160,6 @@ public class FHIRRoute extends RouteBuilder {
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Search")
-					.to("direct:Logon")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
 				            exchange.getIn().setBody("ReferralRequest/"+exchange.getIn().getHeader("_id"));
@@ -150,11 +199,13 @@ public class FHIRRoute extends RouteBuilder {
 				.to("direct:ReferralRequestGet")
 				// Output results
 				.to("direct:PostBundleReferralRequest")
-			.end();
+			.end()
+			.to("direct:Logoff");
 			
 		
 		// Calls eRS to establish a session
 		from("direct:Logon")
+			.routeId("eRS Logon")
 			.process(new Processor() {
 				public void process(Exchange exchange) throws Exception {
 					exchange.getIn().removeHeaders("*","_id|version|_revinclude|status");
@@ -165,8 +216,8 @@ public class FHIRRoute extends RouteBuilder {
 					exchange.getIn().setHeader("XAPI_FQDN",env.getProperty("FQDN"));
 					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
 					exchange.getIn().setHeader("FileRef","1-ProfessionalSessionPost.json");
-					exchange.getIn().setHeader("token", getToken());
-					String request = getRequest(exchange);
+					//exchange.getIn().setHeader("token", );
+					String request = getRequest(getToken());
 									
 					exchange.getIn().setBody(request);
 				}
@@ -178,7 +229,23 @@ public class FHIRRoute extends RouteBuilder {
 			.to("direct:eRSCall")
 			.to("mock:resultProfessionalSessionPut");
 			
-		
+		from("direct:Logoff")
+			.routeId("eRS Logoff")
+			.process(new Processor() {
+				public void process(Exchange exchange) throws Exception {
+					exchange.getIn().setHeader(Exchange.HTTP_PATH,"ProfessionalSession/"+exchange.getIn().getHeader("HTTP_X_SESSION_KEY"));
+					exchange.getIn().setHeader(Exchange.HTTP_METHOD, "DELETE");
+					exchange.getIn().setHeader(Exchange.HTTP_QUERY,"");
+					exchange.getIn().setHeader("XAPI_ASID",env.getProperty("ASID"));
+					exchange.getIn().setHeader("XAPI_FQDN",env.getProperty("FQDN"));
+					exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"application/json");
+					exchange.getIn().setHeader("FileRef","10-ProfessionalSessionDelete.json");
+					exchange.getIn().setBody("");
+				}
+			})
+			.to("direct:eRSCall")
+			.to("mock:resultProfessionalSessionDelete");
+			// Add in a FHIR Operationoutcome. Currently returns a null body
 		
 		
 		from("direct:ReferralRequestGet")
@@ -223,6 +290,15 @@ public class FHIRRoute extends RouteBuilder {
 			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PreHttp?showAll=true&multiline=true&level=INFO")
 			.to(httpsEndpoint)
 			.to("log:uk.nhs.jorvik.fhirTest.E_RS.PostHttp?showAll=true&multiline=true&level=INFO")
+			.process(new Processor() {
+				public void process(Exchange exchange) throws Exception {
+					// To cope with null bodies. Can be removed if not using file 
+					if (exchange.getIn().getBody() == null)
+					{
+						exchange.getIn().setBody("");
+					}
+				}
+			})
 			.to("file:C://test//e-RS?fileName=$simple{date:now:yyyyMMdd}-${id}-${in.header.FileRef}");
 			// only include file for debug. 
 		
@@ -254,12 +330,12 @@ public class FHIRRoute extends RouteBuilder {
 		return token;
 	}
 	
-	private String getRequest(Exchange exchange)
+	private String getRequest(String token)
 	{
 		String request = "{"
 					+" \"typeInfo\": \"uk.nhs.ers.xapi.dto.v1.session.ProfessionalSession\" ,"
 					//
-					+" \"token\": \""+exchange.getIn().getHeader("token").toString()+"\" "
+					+" \"token\": \""+token+"\" "
 						+" }";
 		return request;
 	}

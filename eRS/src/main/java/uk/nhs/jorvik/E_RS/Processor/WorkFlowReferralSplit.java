@@ -8,6 +8,7 @@ import java.io.Reader;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WorkFlowReferralSplit implements Processor {
@@ -27,14 +28,20 @@ public class WorkFlowReferralSplit implements Processor {
         reader.close();
         String jsonString = "";
         JSONObject jsonObject = new JSONObject(buffer.toString());
-    	
-        JSONArray jsonArray = jsonObject.getJSONArray("entry");
-        
-        for (int f= 0; f<jsonArray.length(); f++)
+    	try
+    	{
+	        JSONArray jsonArray = jsonObject.getJSONArray("entry");
+	        
+	        for (int f= 0; f<jsonArray.length(); f++)
+	        {
+	        	JSONObject item = jsonArray.getJSONObject(f);
+	        	JSONObject ref = item.getJSONObject("item");
+	        	jsonString = jsonString + ref.getString("reference") +",";
+	        }
+    	}
+        catch (JSONException ex)
         {
-        	JSONObject item = jsonArray.getJSONObject(f);
-        	JSONObject ref = item.getJSONObject("item");
-        	jsonString = jsonString + ref.getString("reference") +",";
+        	// Do nothing the entry hasn't been found. This should mean no referrals on the worklist
         }
         exchange.getIn().setBody(jsonString);
 	}
