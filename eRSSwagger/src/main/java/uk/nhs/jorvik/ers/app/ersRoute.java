@@ -241,12 +241,12 @@ public class ersRoute extends RouteBuilder {
 				.endRest();
 		
 		rest("/Dstu2/ReferralRequest")
-	    	.get("/{_id}")
+			.get("/{_id}")
 				.description("Interface to retrieve Referral")
 				.param().type(RestParamType.path).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
 				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
-				
+				.param().type(RestParamType.query).name("_revinclude").required(false).allowableValues("*").description("Include referenced resources ").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Get")
@@ -262,9 +262,8 @@ public class ersRoute extends RouteBuilder {
 				.endRest()
 			 .get("/")
 				.description("Interface to query the eRS")
-				.param().type(RestParamType.query).name("_revinclude").required(false).description("Include referenced resources ").dataType("string").endParam()
 				.param().type(RestParamType.query).name("status").required(false).defaultValue("recieved").description("Defaults to request and is hard coded  ").dataType("string").endParam()
-				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
+				.param().type(RestParamType.query).required(false).defaultValue("json").allowableValues("json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
