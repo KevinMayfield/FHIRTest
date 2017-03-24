@@ -29,7 +29,9 @@ public class Application  {
 		System.setProperty(AuthenticationFilter.HAWTIO_AUTHENTICATION_ENABLED, "false");
         SpringApplication.run(Application.class, args);
     }
-
+	
+	// This section copied from https://github.com/bowdoincollege/spring-boot-camel-sample
+	
 	@PostConstruct
 	public void init() {
 		final ConfigManager configManager = new ConfigManager();
