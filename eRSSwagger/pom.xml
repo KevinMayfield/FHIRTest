@@ -37,6 +37,7 @@
 	    <spring-boot-version>1.4.0.RELEASE</spring-boot-version>
 	    <swagger-ui-version>2.1.4</swagger-ui-version>
 	    <hawtio.version>1.5.0</hawtio.version>
+	    <log4j-version>2.8.1</log4j-version>
   </properties>
 
   <!-- Spring-Boot and Camel BOM -->
@@ -70,27 +71,34 @@
 	    </dependency>
     <!-- Camel -->
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring-boot-starter</artifactId>
-      <version>${camel-version}</version>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-spring-boot-starter</artifactId>
+	      <version>${camel-version}</version>
     </dependency>
      
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-swagger-java</artifactId>
-      <version>${camel-version}</version>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-swagger-java</artifactId>
+	      <version>${camel-version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-servlet</artifactId>
-      <version>${camel-version}</version>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-servlet</artifactId>
+	      <version>${camel-version}</version>
+	       <!--  <exclusions>
+	        <exclusion>
+	          <groupId>org.apache.tomcat.embed</groupId>
+	          <artifactId>tomcat-embed-logging-juli</artifactId>
+	        </exclusion>
+	      </exclusions>  -->
     </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jackson</artifactId>
-      <version>${camel-version}</version>
-    </dependency>
-    <dependency>
+    
+	    <dependency>
+	      <groupId>org.apache.camel</groupId>
+	      <artifactId>camel-jackson</artifactId>
+	      <version>${camel-version}</version>
+	    </dependency>
+	    <dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-http4</artifactId>
 			<version>${camel-version}</version>
@@ -112,31 +120,65 @@
 		    <artifactId>json</artifactId>
 		</dependency> 
 		
-		<dependency>
-		      <groupId>org.webjars</groupId>
-		      <artifactId>swagger-ui</artifactId>
-		      <version>${swagger-ui-version}</version>
-		      <scope>provided</scope>
-    	</dependency>
-		
-	
+			
 	    <dependency>
 	        <groupId>io.hawt</groupId>
 	        <artifactId>hawtio-core</artifactId>
 	        <version>${hawtio.version}</version>
 	    </dependency>
-   
-   	<dependency>
+	    
+		<dependency>
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-core</artifactId>
 		</dependency>
-   
+       
+	    
+	    <!-- 
+	    <dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		 -->
+    <!-- logging 
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <scope>runtime</scope>
+      <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <scope>runtime</scope>
+      <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <scope>runtime</scope>
+      <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jcl</artifactId>
+      <scope>runtime</scope>
+      <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <scope>runtime</scope>
+      <version>${log4j-version}</version>
+    </dependency>
+    -->
+    
+   	
     <!-- Test -->
     <dependency>
       	<groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-test</artifactId>
 	    <scope>test</scope>
-
     </dependency>
     <dependency>
 	      <groupId>org.apache.camel</groupId>

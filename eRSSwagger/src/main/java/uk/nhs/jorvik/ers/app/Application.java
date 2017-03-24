@@ -18,8 +18,10 @@ import io.hawt.springboot.EnableHawtio;
 import io.hawt.system.ConfigManager;
 import io.hawt.web.AuthenticationFilter;
 
+
 @SpringBootApplication
 @EnableHawtio
+//@EnableSwagger2
 public class Application  {
 	
 	@Autowired
@@ -56,5 +58,17 @@ public class Application  {
         registration.setName("CamelServlet");
         return registration;
     }
-   
+  
+    
+    /*
+    @Bean
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+	          .apis(RequestHandlerSelectors.any())              
+	          .paths(PathSelectors.any())                          
+	          .build()
+          .pathMapping("/swag");                                           
+    }
+   */
 }
