@@ -133,7 +133,7 @@ public class ersRoute extends RouteBuilder {
 	    	  log.info(("error code: " + gaticket.getLastError()));
 	    }
 	    		
-	    // So this url should work 
+	    // E this url should work 
 	    // http://localhost:8181/eRS/dstu2/ReferralRequest/000000090007
 	    // http://localhost:8181/eRS/dstu2/ReferralRequest?_id=000000090007&_revinclude=*
 	    
@@ -142,7 +142,8 @@ public class ersRoute extends RouteBuilder {
 	    restConfiguration()
 			.bindingMode(RestBindingMode.off)
 			.contextPath("/eRS")
-			.port(8181)
+			.port(8080)
+			.host("127.0.0.1")
 			.dataFormatProperty("prettyPrint","true")
 			.apiContextPath("/api-doc")
             .apiProperty("api.title", "E-Referral Service API").apiProperty("api.version", "1.0")
@@ -166,7 +167,7 @@ public class ersRoute extends RouteBuilder {
 		// This section defines the rest endpoints
 		// the param calls are not necessary, the are used by swagger should you wish to incorporate camel-swagger
 		rest("/Dstu2/Logon")
-	    	.description("eRS")
+	    	.description("Performs Session Management")
 	    	.get("/")
 		    	.description("Interface to logon to eRS")
 				.responseMessage().code(200).message("OK").endResponseMessage()
@@ -175,6 +176,7 @@ public class ersRoute extends RouteBuilder {
 					.to("direct:Logon")
 				.endRest();
 		rest("/Dstu2/Logoff")
+			.description("Performs Session Management")
 	    	.delete("/")
 		    	.description("Interface to logoff eRS")
 		    	.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
@@ -185,6 +187,7 @@ public class ersRoute extends RouteBuilder {
 				.endRest();
 		
 		rest("/Dstu2/Binary")
+			.description("Referral Supporting Information")
 	    	.get("/{attachmentId}")
 		    	.description("eRS Binary Get")
 		    	.param().type(RestParamType.path).name("attachmentId").required(true).description("Attachment Id").dataType("string").endParam()
@@ -195,6 +198,9 @@ public class ersRoute extends RouteBuilder {
 					.routeId("eRS Binary Get")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
+				        	exchange.getIn().setHeader("accept","*/*");
+				        	//exchange.getIn().removeHeader("accept-encoding");
+				        	//exchange.getIn().removeHeader("accept-language");
 				            exchange.getIn().setHeader(Exchange.HTTP_PATH, "Binary/"+exchange.getIn().getHeader("attachmentId"));
 				        }
 					})
@@ -219,6 +225,7 @@ public class ersRoute extends RouteBuilder {
 					.routeId("eRS ValueSet Get")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
+				        	exchange.getIn().removeHeader("accept");
 				            exchange.getIn().setHeader(Exchange.HTTP_PATH, "ValueSet/"+exchange.getIn().getHeader("valueSetId"));
 				            exchange.getIn().setHeader("FileRef","9-ValueSet.json");
 				        }
@@ -239,11 +246,15 @@ public class ersRoute extends RouteBuilder {
 				.param().type(RestParamType.path).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
 				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
+				
 				.responseMessage().code(200).message("OK").endResponseMessage()
 				.route()
 					.routeId("eRS ReferralRequest Get")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
+				        	exchange.getIn().setHeader(Exchange.ACCEPT_CONTENT_TYPE, "application/json+fhir");
+				        	exchange.getIn().setHeader(Exchange.CONTENT_TYPE, "application/json+fhir");
+				        	exchange.getIn().setHeader("accept", "application/json+fhir");
 				            exchange.getIn().setBody("ReferralRequest/"+exchange.getIn().getHeader("_id"));
 				        }
 					})
@@ -251,9 +262,8 @@ public class ersRoute extends RouteBuilder {
 				.endRest()
 			 .get("/")
 				.description("Interface to query the eRS")
-				.param().type(RestParamType.query).name("_id").required(true).description("Resource Id e.g. ").dataType("string").endParam()
 				.param().type(RestParamType.query).name("_revinclude").required(false).description("Include referenced resources ").dataType("string").endParam()
-				.param().type(RestParamType.query).name("status").required(false).description("Defaults to request and is hard coded  ").dataType("string").endParam()
+				.param().type(RestParamType.query).name("status").required(false).defaultValue("recieved").description("Defaults to request and is hard coded  ").dataType("string").endParam()
 				.param().type(RestParamType.query).required(false).defaultValue("xml").allowableValues("xml","json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
@@ -261,6 +271,7 @@ public class ersRoute extends RouteBuilder {
 					.routeId("eRS ReferralRequest Search")
 					.process(new Processor() {
 				        public void process(Exchange exchange) throws Exception {
+				        	exchange.getIn().removeHeader("accept");
 				            exchange.getIn().setBody("ReferralRequest/"+exchange.getIn().getHeader("_id"));
 				        }
 					})
