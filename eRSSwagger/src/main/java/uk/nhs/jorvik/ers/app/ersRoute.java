@@ -262,7 +262,7 @@ public class ersRoute extends RouteBuilder {
 				.endRest()
 			 .get("/")
 				.description("Interface to query the eRS")
-				.param().type(RestParamType.query).name("status").required(false).defaultValue("recieved").description("Defaults to request and is hard coded  ").dataType("string").endParam()
+				.param().type(RestParamType.query).name("status").required(false).defaultValue("received").description("Defaults to request and is hard coded  ").dataType("string").endParam()
 				.param().type(RestParamType.query).required(false).defaultValue("json").allowableValues("json").name("_format").description("Format of the FHIR response: json or xml").dataType("string").endParam()
 				.param().type(RestParamType.header).name("HTTP_X_SESSION_KEY").required(true).description("Session Id").dataType("string").endParam()
 				.responseMessage().code(200).message("OK").endResponseMessage()
