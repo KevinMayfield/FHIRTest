@@ -1,4 +1,4 @@
-package uk.nhs.jorvik.fhir.E_RS.javaconfig;
+package uk.nhs.jorvik.ers.app;
 
 import java.io.InputStream;
 
@@ -25,21 +25,22 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.OperationOutcome;
 import ca.uhn.fhir.model.dstu2.valueset.IssueTypeEnum;
 import ca.uhn.fhir.parser.IParser;
-import uk.nhs.jorvik.E_RS.Processor.SupportingInformationAggregation;
-import uk.nhs.jorvik.E_RS.Processor.ValueSetProcessor;
-import uk.nhs.jorvik.E_RS.Processor.BinaryGet;
-import uk.nhs.jorvik.E_RS.Processor.Logoff;
-import uk.nhs.jorvik.E_RS.Processor.Logon;
-import uk.nhs.jorvik.E_RS.Processor.ReferralRequestSupportedInformationSplit;
-import uk.nhs.jorvik.E_RS.Processor.ProfessionalSession;
-import uk.nhs.jorvik.E_RS.Processor.ReferralRequestPost;
-import uk.nhs.jorvik.E_RS.Processor.WorkFlowGet;
-import uk.nhs.jorvik.E_RS.Processor.WorkFlowReferralSplit;
+import uk.nhs.jorvik.ers.processor.BinaryGet;
+import uk.nhs.jorvik.ers.processor.Logoff;
+import uk.nhs.jorvik.ers.processor.Logon;
+import uk.nhs.jorvik.ers.processor.ProfessionalSession;
+import uk.nhs.jorvik.ers.processor.ReferralRequestPost;
+import uk.nhs.jorvik.ers.processor.ReferralRequestSupportedInformationSplit;
+import uk.nhs.jorvik.ers.processor.SupportingInformationAggregation;
+import uk.nhs.jorvik.ers.processor.ValueSetProcessor;
+import uk.nhs.jorvik.ers.processor.WorkFlowGet;
+import uk.nhs.jorvik.ers.processor.WorkFlowReferralSplit;
+
 
 
 @Component
 @PropertySource("classpath:ERS.properties")
-public class FHIRRoute extends RouteBuilder {
+public class ersRoute extends RouteBuilder {
 	
 	@Autowired
 	protected Environment env;
@@ -139,9 +140,8 @@ public class FHIRRoute extends RouteBuilder {
 	    Endpoint httpsEndpoint = setupSSLConext(getContext());  
 	   	    
 	    restConfiguration()
-			.component("jetty")
 			.bindingMode(RestBindingMode.off)
-			.contextPath("eRS")
+			.contextPath("/eRS")
 			.port(8181)
 			.dataFormatProperty("prettyPrint","true")
 			.apiContextPath("/api-doc")

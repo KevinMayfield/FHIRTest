@@ -9,8 +9,15 @@
 	    <hapi-v2-version>2.2</hapi-v2-version>
 	    <slf4j-version>1.7.5</slf4j-version>
 	    <junit-version>4.12</junit-version>
+		 <spring-version>4.3.2.RELEASE</spring-version>
+	    <spring-boot-version>1.4.0.RELEASE</spring-boot-version>
+	    <swagger-ui-version>2.1.4</swagger-ui-version>
   	</properties>
+  	
   	<dependencies>
+	  	
+	  	
+	  	
 	  	<!--  Logging  -->
 	  	
 	 	<dependency>
@@ -21,6 +28,7 @@
      
 	  	 <!--  Camel  --> 
 	  	
+	  	  	
 	  	 <dependency>
 	      <groupId>org.apache.camel</groupId>
 	      <artifactId>camel-core</artifactId>
@@ -57,6 +65,13 @@
   			<artifactId>camel-jackson</artifactId>
   			<version>2.9.2</version>
 		</dependency>
+		
+		<dependency>
+      		<groupId>org.apache.camel</groupId>
+      		<artifactId>camel-swagger-java</artifactId>
+      		<version>${camel-version}</version>
+    	</dependency>
+		
 		 <dependency>
 		    <groupId>org.apache.camel</groupId>
 		    <artifactId>camel-test</artifactId>
@@ -110,6 +125,13 @@
 		    <version>1</version>
 		</dependency>
 		
+		 <dependency>
+		      <groupId>org.webjars</groupId>
+		      <artifactId>swagger-ui</artifactId>
+		      <version>${swagger-ui-version}</version>
+		      <scope>provided</scope>
+    	</dependency>
+		
     </dependencies>
      <build>
     <plugins>
@@ -123,7 +145,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
+		
       <!-- Allows the routes to be run via 'mvn exec:java' -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -149,7 +171,73 @@
 					</execution>
 				</executions>
 			</plugin>
-      <!-- END SNIPPET: example -->
-    </plugins>
+			 <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>swagger-ui</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/swagger-api/swagger-ui/archive/v2.1.4.tar.gz</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Load the Swagger-UI components into the src/main/webapp/ directory to enable
+            viewing/testing of the API routes. Accessible at http://<host>:<port>/swagger. -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/main/resources/webapp</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/swagger-ui-2.1.4/dist</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			
+		<!-- 
+		 <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+              
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui-version}</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>  -->
+	</plugins>
   </build>
 </project>
