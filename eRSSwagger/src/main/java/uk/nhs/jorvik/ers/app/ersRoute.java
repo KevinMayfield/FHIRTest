@@ -118,31 +118,35 @@ public class ersRoute extends RouteBuilder {
 		
 		GATicket gaticket = null;
 		
+		if (env.getProperty("secure").equals("true"))
+		{
+		    try {
+		      log.info("TEST - MAIN: Starting.");
+		      gaticket = new GATicket();
+		      gaticket.setIsDebug(true);
+		      ssoTicket = gaticket.getTicket();
+		      log.info(("TEST - MAIN: GATicket -> " + ssoTicket));
+		      //Long ssoTicketCode = gaticket.getLastError();
+		    }
+		    catch (Throwable err) {
+		      err.printStackTrace();
+		      if (null!=gaticket)
+		    	  log.info(("error code: " + gaticket.getLastError()));
+		    }
+		    		
+		    // E this url should work 
+		    // http://localhost:8181/eRS/dstu2/ReferralRequest/000000090007
+		    // http://localhost:8181/eRS/dstu2/ReferralRequest?_id=000000090007&_revinclude=*
+		    
+		   
+		} 
 		
-	    try {
-	      log.info("TEST - MAIN: Starting.");
-	      gaticket = new GATicket();
-	      gaticket.setIsDebug(true);
-	      ssoTicket = gaticket.getTicket();
-	      log.info(("TEST - MAIN: GATicket -> " + ssoTicket));
-	      //Long ssoTicketCode = gaticket.getLastError();
-	    }
-	    catch (Throwable err) {
-	      err.printStackTrace();
-	      if (null!=gaticket)
-	    	  log.info(("error code: " + gaticket.getLastError()));
-	    }
-	    		
-	    // E this url should work 
-	    // http://localhost:8181/eRS/dstu2/ReferralRequest/000000090007
-	    // http://localhost:8181/eRS/dstu2/ReferralRequest?_id=000000090007&_revinclude=*
-	    
-	    Endpoint httpsEndpoint = setupSSLConext(getContext());  
-	   	    
+		 Endpoint httpsEndpoint = setupSSLConext(getContext());  
+		
 	    restConfiguration()
 			.bindingMode(RestBindingMode.off)
 			.contextPath("/eRS")
-			.port(8080)
+			.port(8181)
 			.host("127.0.0.1")
 			.dataFormatProperty("prettyPrint","true")
 			.apiContextPath("/api-doc")

@@ -8,10 +8,9 @@ import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+
 
 import io.hawt.config.ConfigFacade;
 import io.hawt.springboot.EnableHawtio;
@@ -21,7 +20,6 @@ import io.hawt.web.AuthenticationFilter;
 
 @SpringBootApplication
 @EnableHawtio
-//@EnableSwagger2
 public class Application  {
 	
 	@Autowired
@@ -29,6 +27,7 @@ public class Application  {
 	
 	public static void main(String[] args) {
 		System.setProperty(AuthenticationFilter.HAWTIO_AUTHENTICATION_ENABLED, "false");
+		System.setProperty("server.port", "8181");
         SpringApplication.run(Application.class, args);
     }
 	
@@ -58,7 +57,7 @@ public class Application  {
         registration.setName("CamelServlet");
         return registration;
     }
-  
+   
     
     /*
     @Bean
