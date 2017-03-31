@@ -1,33 +1,24 @@
 package uk.nhs.careConnect.dstu2.provider;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.SessionFactory;
-import org.hl7.fhir.dstu3.model.EpisodeOfCare;
-import org.hl7.fhir.dstu3.model.IdType;
-import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.WebApplicationContext;
-
-
-import ca.uhn.fhir.rest.annotation.Create;
-import ca.uhn.fhir.rest.annotation.IdParam;
-
-import ca.uhn.fhir.rest.annotation.OptionalParam;
-import ca.uhn.fhir.rest.annotation.Read;
-import ca.uhn.fhir.rest.annotation.ResourceParam;
-import ca.uhn.fhir.rest.annotation.Search;
+import ca.uhn.fhir.model.dstu2.resource.EpisodeOfCare;
+import ca.uhn.fhir.model.dstu2.resource.OperationOutcome;
+import ca.uhn.fhir.rest.annotation.*;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 import ca.uhn.fhir.rest.param.ReferenceParam;
 import ca.uhn.fhir.rest.param.TokenParam;
 import ca.uhn.fhir.rest.server.IResourceProvider;
+import org.hibernate.SessionFactory;
+import org.hl7.fhir.instance.model.api.IIdType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.WebApplicationContext;
 import uk.nhs.careConnect.dstu2.dao.EpisodeOfCareDAO;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 public class EpisodeOfCareResourceProvider extends BaseProvider implements IResourceProvider {
@@ -93,7 +84,7 @@ public class EpisodeOfCareResourceProvider extends BaseProvider implements IReso
 	
 	
 	 @Read()
-	    public EpisodeOfCare getResourceById(HttpServletRequest theRequest,@IdParam IdType theId) {
+	    public EpisodeOfCare getResourceById(HttpServletRequest theRequest,@IdParam IIdType theId) {
 		 
 		 myAppCtx = ContextLoaderListener.getCurrentWebApplicationContext();
 		 	sessionFactory = myAppCtx.getBean(SessionFactory.class);

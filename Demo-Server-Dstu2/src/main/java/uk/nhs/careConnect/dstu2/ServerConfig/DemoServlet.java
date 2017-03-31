@@ -1,23 +1,19 @@
 package uk.nhs.careConnect.dstu2.ServerConfig;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.ServletException;
-
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
-
 import ca.uhn.fhir.narrative.DefaultThymeleafNarrativeGenerator;
 import ca.uhn.fhir.narrative.INarrativeGenerator;
 import ca.uhn.fhir.rest.server.EncodingEnum;
+import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
-import uk.nhs.careConnect.dstu2.provider.CodeSystemResourceProvider;
-import uk.nhs.careConnect.dstu2.provider.ValueSetResourceProvider;
-import ca.uhn.fhir.rest.server.IResourceProvider;
-
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import uk.nhs.careConnect.dstu2.provider.ValueSetResourceProvider;
+
+import javax.servlet.ServletException;
+import java.util.ArrayList;
+import java.util.List;
 
 @EnableWebMvc
 public class DemoServlet extends RestfulServer {
@@ -37,7 +33,7 @@ public class DemoServlet extends RestfulServer {
 	 * Constructor
 	 */
 	public DemoServlet() {
-		super(FhirContext.forDstu3()); // Support DSTU2
+		super(FhirContext.forDstu2()); // Support DSTU2
 	}
 	//private static final Logger log = LoggerFactory.getLogger(uk.nhs.leedsth.fhir.hapifhirServerConfig.JorvikServlet.class);
 	/**
@@ -49,11 +45,10 @@ public class DemoServlet extends RestfulServer {
 	public void initialize() throws ServletException {
 		super.initialize();
 		
-		FhirVersionEnum fhirVersion = FhirVersionEnum.DSTU3;
+		FhirVersionEnum fhirVersion = FhirVersionEnum.DSTU2;
 		setFhirContext(new FhirContext(fhirVersion));
 		
-	// KGM 7/2/2017 Disabled line	this.myAppCtx = ContextLoaderListener.getCurrentWebApplicationContext();
-		
+
 		List<IResourceProvider> providers = new ArrayList<IResourceProvider>();
 		//providers.add(new DocumentReferenceResourceProvider());
 		//providers.add(new PatientResourceProvider());
@@ -61,7 +56,7 @@ public class DemoServlet extends RestfulServer {
 		//providers.add(new ConceptMapResourceProvider());
 		providers.add(new ValueSetResourceProvider());
 		//providers.add(new EpisodeOfCareResourceProvider());
-		providers.add(new CodeSystemResourceProvider());
+		//providers.add(new CodeSystemResourceProvider());
 		
 		setResourceProviders(providers);
 		

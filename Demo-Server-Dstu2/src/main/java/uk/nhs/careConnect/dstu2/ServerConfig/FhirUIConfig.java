@@ -43,9 +43,9 @@ public class FhirUIConfig {
 		retVal
 			.addServer()
 				.withId("home")
-				.withFhirVersion(FhirVersionEnum.DSTU3)
-				.withBaseUrl("${serverBase}/Stu3")
-				.withName("Care Connect Stu3");
+				.withFhirVersion(FhirVersionEnum.DSTU2)
+				.withBaseUrl("${serverBase}/Dstu2")
+				.withName("Care Connect Stu2");
 			
 		return retVal;
 	}

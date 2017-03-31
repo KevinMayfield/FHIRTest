@@ -1,48 +1,33 @@
 package uk.nhs.careConnect.dstu2.dao;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import javax.persistence.PersistenceException;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-
-import org.hl7.fhir.dstu3.model.EpisodeOfCare;
-
-import org.hl7.fhir.dstu3.model.IdType;
-
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ReferralRequest;
-import org.hl7.fhir.instance.model.api.IBaseMetaType;
-
-import org.hl7.fhir.instance.model.api.IIdType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
+import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
+import ca.uhn.fhir.model.dstu2.resource.EpisodeOfCare;
+import ca.uhn.fhir.model.dstu2.resource.ReferralRequest;
 import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-
 import ca.uhn.fhir.rest.method.RequestDetails;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 import ca.uhn.fhir.rest.param.ReferenceParam;
 import ca.uhn.fhir.rest.param.TokenParam;
+import org.hl7.fhir.instance.model.api.IBaseMetaType;
+import org.hl7.fhir.instance.model.api.IIdType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.nhs.careConnect.entity.EpisodeOfCareEntity;
 import uk.nhs.careConnect.entity.EpisodeOfCareIdentifier;
 import uk.nhs.careConnect.entity.PatientEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceException;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class EpisodeOfCareDAO extends BaseDAO<EpisodeOfCare>
@@ -247,8 +232,8 @@ implements IEpisodeOfCareDAO {
 		
 		if (edr.getTypeCT() != null)
 		{
-			CodeableConcept type = new CodeableConcept();
-			Coding code = type.addCoding()
+			CodeableConceptDt type = new CodeableConceptDt();
+			CodingDt code = type.addCoding()
 				.setCode(edr.getTypeCT().getCode())
 				.setDisplay(edr.getTypeCT().getDisplay());
 			if (edr.getTypeCT().getTermCodeSystem() != null )
@@ -263,14 +248,14 @@ implements IEpisodeOfCareDAO {
 		}
 		if (edr.getPatientEntity() !=null)
 		{
-			episode.setPatient(new Reference("Patient/"+edr.getPatientEntity().getId()));
+			episode.setPatient(new ResourceReferenceDt("Patient/"+edr.getPatientEntity().getId()));
 		}
 		
 		return episode;
 	}
 	
 	@Override
-	public EpisodeOfCare  read(IdType theId) {
+	public EpisodeOfCare  read(IIdType theId) {
 		log.trace("called read theId="+ theId.toString());
 		log.trace("called read Id="+ theId.getIdPart());
 		EpisodeOfCare episode  = null;
@@ -281,7 +266,7 @@ implements IEpisodeOfCareDAO {
 			log.trace("Obtained entityManager EpisodeOfCare.read");
 			
 			
-			EpisodeOfCareEntity edr = (EpisodeOfCareEntity) em.find(EpisodeOfCareEntity.class,Integer.parseInt(theId.getIdPart()));
+			EpisodeOfCareEntity edr = em.find(EpisodeOfCareEntity.class,Integer.parseInt(theId.getIdPart()));
 			
 			episode = convert(edr);
 			
@@ -308,9 +293,9 @@ implements IEpisodeOfCareDAO {
 
 	
 	public List<EpisodeOfCare> search(
-			@OptionalParam(name = ReferralRequest.SP_TYPE) TokenParam theType, 
+			@OptionalParam(name = ReferralRequest.SP_TYPE) TokenParam theType,
     		@OptionalParam(name=ReferralRequest.SP_PATIENT) ReferenceParam thePatient,
-    		@OptionalParam(name=ReferralRequest.SP_OCCURRENCE_DATE) DateRangeParam period
+    		@OptionalParam(name=ReferralRequest.SP_DATE) DateRangeParam period
     		
 			) {
 		
