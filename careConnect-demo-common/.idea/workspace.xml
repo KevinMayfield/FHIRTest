@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9a17277-5622-4012-8ea5-4faecedad9cc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/main.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Demo-Server-Stu3/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/pom.xml" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/DemoServlet.java" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/DemoServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/FhirServerConfig.java" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/FhirServerConfig.java" />
@@ -32,6 +31,489 @@
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path=".idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
+    <ignored path=".idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" />
+    <ignored path=".idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
+    <ignored path=".idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
+    <ignored path=".idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" />
+    <ignored path=".idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" />
+    <ignored path=".idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" />
+    <ignored path=".idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" />
+    <ignored path=".idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
+    <ignored path=".idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" />
+    <ignored path=".idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
+    <ignored path=".idea/compiler.xml" />
+    <ignored path=".idea/encodings.xml" />
+    <ignored path=".idea/kotlinc.xml" />
+    <ignored path=".idea/vcs.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_base_2_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_structures_dstu3_2_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__ca_uhn_hapi_hapi_base_2_2.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__com_google_code_gson_gson_2_7.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__com_sun_xml_bind_jaxb_core_2_2_11.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__com_sun_xml_bind_jaxb_impl_2_2_11.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__commons_httpclient_commons_httpclient_3_1.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__javax_xml_stream_stax_api_1_0_2.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__junit_junit_4_12.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_core_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_hl7_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_http_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_http_common_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_spring_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_spring_javaconfig_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_test_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_camel_camel_test_spring_2_18_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_2.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_5.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_apache_servicemix_bundles_org_apache_servicemix_bundles_cglib_3_2_4_1.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_codehaus_woodstox_stax2_api_3_1_4.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_codehaus_woodstox_woodstox_core_asl_4_4_1.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_hamcrest_java_hamcrest_2_0_0_0.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_21.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_5.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_aop_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_beans_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_context_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_core_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_expression_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_test_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__org_springframework_spring_tx_4_3_7_RELEASE.xml" />
+    <ignored path="../CareConnectPatient/.idea/libraries/Maven__xpp3_xpp3_min_1_1_4c.xml" />
+    <ignored path="../CareConnectPatient/.idea/compiler.xml" />
+    <ignored path="../CareConnectPatient/.idea/kotlinc.xml" />
+    <ignored path="../CareConnectPatient/.idea/misc.xml" />
+    <ignored path="../CareConnectPatient/.idea/modules.xml" />
+    <ignored path="../CareConnectPatient/.idea/vcs.xml" />
+    <ignored path="../CareConnectPatient/.idea/workspace.xml" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/application.properties" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/log4j.properties" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/logback.xml" />
+    <ignored path="../Demo-Server-Dstu2/target/surefire-reports/TEST-uk.nhs.careConnect.dstu2.test.DemoServerTest.xml" />
+    <ignored path="../Demo-Server-Dstu2/target/surefire-reports/uk.nhs.careConnect.dstu2.test.DemoServerTest.txt" />
+    <ignored path="../Demo-Server-Dstu2/target/test-classes/uk/nhs/careConnect/dstu2/test/DemoServerTest.class" />
+    <ignored path="../Demo-Server-Dstu2/target/test-classes/uk/nhs/careConnect/dstu2/test/RandomServerPortProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+    <ignored path="../Demo-Server-Dstu2/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
+    <ignored path="../Demo-Server-Dstu2/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
+    <ignored path="../Demo-Server-Dstu2/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/bootstrap-datetimepicker.min.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/bootstrap.min.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/hapi-narrative.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2-spinner.gif" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2.png" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2x2.png" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/tester.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.eot" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.svg" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.ttf" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.woff" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner.png" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner_narrow.png" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner_right.png" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/bootstrap-datetimepicker.min.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/bootstrap.min.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/ClientCodeGeneratorHapi.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/jquery-2.1.0.min.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/jquery-2.1.1.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/moment.min.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/RestfulTester.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/select2.min.js" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/MANIFEST.MF" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/hapi-fhir-tester-application-context.xml" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/BaseDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/ConceptDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/DocumentReferenceDAO$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/DocumentReferenceDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/EpisodeOfCareDAO$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/EpisodeOfCareDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IBaseDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IConceptMapDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IDocumentReferenceDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IEpisodeOfCareDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IPatientDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/IValueSetDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/PatientDAO$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/PatientDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/dao/ValueSetDAO.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/provider/BaseProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/provider/DocumentReferenceResourceProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/provider/EpisodeOfCareResourceProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/provider/PatientResourceProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/provider/ValueSetResourceProvider.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/ServerConfig/DemoServlet.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/ServerConfig/FhirServerConfig.class" />
+    <ignored path="../Demo-Server-Dstu2/target/classes/uk/nhs/careConnect/dstu2/ServerConfig/FhirUIConfig.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/css/font-awesome.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/css/font-awesome.min.css" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.eot" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.svg" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.ttf" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.woff" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/FontAwesome.otf" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/bordered-pulled.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/core.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/fixed-width.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/font-awesome.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/icons.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/larger.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/list.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/mixins.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/path.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/rotated-flipped.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/spinning.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/stacked.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/variables.less" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_bordered-pulled.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_core.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_fixed-width.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_icons.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_larger.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_list.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_mixins.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_path.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_rotated-flipped.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_spinning.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_stacked.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_variables.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/font-awesome.scss" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/maven/ca.uhn.hapi.fhir/hapi-fhir-testpage-overlay/pom.properties" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/maven/ca.uhn.hapi.fhir/hapi-fhir-testpage-overlay/pom.xml" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/.keep" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/aopalliance-1.0.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/attoparser-2.0.1.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-codec-1.10.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-io-2.5.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-lang3-3.4.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-logging-1.2.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/gson-2.7.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-base-2.3.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu-2.3.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu2-2.3.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu3-2.3.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/httpclient-4.5.2.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/httpcore-4.4.5.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/javassist-3.20.0-GA.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/jcl-over-slf4j-1.7.21.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/ognl-3.1.10.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/slf4j-api-1.7.21.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-aop-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-beans-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-context-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-context-support-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-core-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-expression-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-jdbc-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-orm-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-tx-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-web-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-webmvc-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/stax-api-1.0-2.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/stax2-api-3.1.4.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/thymeleaf-3.0.2.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/thymeleaf-spring4-3.0.2.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/unbescape-1.1.4.RELEASE.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/woodstox-core-asl-4.4.1.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/xpp3_min-1.1.4c.jar" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/about.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/home.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/resource.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/result.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-banner.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-buttonclick-handler.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-footer.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-head.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-home-welcome.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-left.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-top-farright.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-top.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-queries.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/window-title.html" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$2.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$3.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$4.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$CaptureInterceptor$MyEntityWrapper.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$CaptureInterceptor.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$ResultType.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/Controller$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/Controller.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/FhirTesterMvcConfig.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep2.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep3.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep4.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep5.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$ServerBuilder.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/client/BearerTokenClientFactory.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/HomeRequest$1.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/HomeRequest.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/ResourceRequest.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/TransactionRequest.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/mvc/AnnotationMethodHandlerAdapterConfigurer.class" />
+    <ignored path="../Demo-Server-Dstu2/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/mvc/ToBindingInitializer.class" />
+    <ignored path="../Demo-Server-Stu3/.idea/compiler.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/encodings.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/misc.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/modules.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/uiDesigner.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/vcs.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/workspace.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_base_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_structures_dstu2_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_structures_dstu3_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_structures_dstu_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_testpage_overlay_classes_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ca_uhn_hapi_fhir_hapi_fhir_testpage_overlay_war_2_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__com_google_code_findbugs_annotations_2_0_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__com_google_code_gson_gson_2_7.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__com_phloc_phloc_commons_4_3_3.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__com_phloc_phloc_schematron_2_7_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__javax_xml_stream_stax_api_1_0_2.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__junit_junit_4_12.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_40.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_0.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__ognl_ognl_3_1_12.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_commons_commons_dbcp2_2_1_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_2.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_5.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_attoparser_attoparser_2_0_2_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_codehaus_woodstox_stax2_api_3_1_4.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_codehaus_woodstox_woodstox_core_asl_4_4_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_ebaysf_web_cors_filter_1_0_1.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_continuation_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_http_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_security_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_server_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_servlet_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_servlets_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_webapp_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_eclipse_jetty_jetty_xml_9_3_14_v20161028.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_hamcrest_java_hamcrest_2_0_0_0.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_7_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_7_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_jboss_jandex_2_0_3_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_21.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_21.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_12.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_aop_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_beans_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_context_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_context_support_4_3_6_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_core_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_expression_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_6_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_orm_4_3_6_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_tx_4_3_6_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_web_4_3_5_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_6_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_0_3_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_3_0_3_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__org_unbescape_unbescape_1_1_4_RELEASE.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__uk_nhs_careConnect_common_core_1_0_SNAPSHOT.xml" />
+    <ignored path="../Demo-Server-Stu3/.idea/libraries/Maven__xpp3_xpp3_min_1_1_4c.xml" />
+    <ignored path="../Demo-Server-Stu3/target/classes/application.properties" />
+    <ignored path="../Demo-Server-Stu3/target/classes/log4j.properties" />
+    <ignored path="../Demo-Server-Stu3/target/classes/logback.xml" />
+    <ignored path="../Demo-Server-Stu3/target/test-classes/uk/nhs/careConnect/stu3/test/DemoServerTest.class" />
+    <ignored path="../Demo-Server-Stu3/target/test-classes/uk/nhs/careConnect/stu3/test/RandomServerPortProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+    <ignored path="../Demo-Server-Stu3/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
+    <ignored path="../Demo-Server-Stu3/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" />
+    <ignored path="../Demo-Server-Stu3/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/bootstrap-datetimepicker.min.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/bootstrap.min.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/hapi-narrative.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2-spinner.gif" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2.png" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/select2x2.png" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/css/tester.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.eot" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.svg" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.ttf" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fonts/glyphicons-halflings-regular.woff" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner.png" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner_narrow.png" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/img/hapi_fhir_banner_right.png" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/bootstrap-datetimepicker.min.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/bootstrap.min.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/ClientCodeGeneratorHapi.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/jquery-2.1.0.min.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/jquery-2.1.1.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/moment.min.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/RestfulTester.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/js/select2.min.js" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/MANIFEST.MF" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/hapi-fhir-tester-application-context.xml" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/BaseDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/CodeSystemDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/ConceptDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/ConceptMapDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/DocumentReferenceDAO$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/DocumentReferenceDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/EpisodeOfCareDAO$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/EpisodeOfCareDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IBaseDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/ICodeSystemDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IConceptMapDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IDocumentReferenceDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IEpisodeOfCareDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IPatientDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/IValueSetDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/PatientDAO$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/PatientDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/dao/ValueSetDAO.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/BaseProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/CodeSystemResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/ConceptMapResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/DocumentReferenceResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/EpisodeOfCareResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/PatientResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/provider/ValueSetResourceProvider.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/ServerConfig/DemoServlet.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/ServerConfig/FhirServerConfigStu3.class" />
+    <ignored path="../Demo-Server-Stu3/target/classes/uk/nhs/careConnect/stu3/ServerConfig/FhirUIConfig.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/css/font-awesome.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/css/font-awesome.min.css" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.eot" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.svg" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.ttf" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/fontawesome-webfont.woff" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/fonts/FontAwesome.otf" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/bordered-pulled.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/core.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/fixed-width.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/font-awesome.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/icons.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/larger.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/list.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/mixins.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/path.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/rotated-flipped.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/spinning.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/stacked.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/less/variables.less" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_bordered-pulled.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_core.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_fixed-width.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_icons.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_larger.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_list.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_mixins.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_path.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_rotated-flipped.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_spinning.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_stacked.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/_variables.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/fa/scss/font-awesome.scss" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/maven/ca.uhn.hapi.fhir/hapi-fhir-testpage-overlay/pom.properties" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/META-INF/maven/ca.uhn.hapi.fhir/hapi-fhir-testpage-overlay/pom.xml" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/.keep" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/aopalliance-1.0.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/attoparser-2.0.1.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-codec-1.10.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-io-2.5.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-lang3-3.4.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/commons-logging-1.2.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/gson-2.7.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-base-2.3.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu-2.3.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu2-2.3.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/hapi-fhir-structures-dstu3-2.3.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/httpclient-4.5.2.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/httpcore-4.4.5.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/javassist-3.20.0-GA.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/jcl-over-slf4j-1.7.21.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/ognl-3.1.10.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/slf4j-api-1.7.21.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-aop-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-beans-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-context-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-context-support-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-core-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-expression-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-jdbc-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-orm-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-tx-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-web-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/spring-webmvc-4.3.6.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/stax-api-1.0-2.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/stax2-api-3.1.4.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/thymeleaf-3.0.2.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/thymeleaf-spring4-3.0.2.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/unbescape-1.1.4.RELEASE.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/woodstox-core-asl-4.4.1.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/lib/xpp3_min-1.1.4c.jar" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/about.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/home.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/resource.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/result.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-banner.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-buttonclick-handler.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-footer.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-head.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-home-welcome.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-left.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-top-farright.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-navbar-top.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/tmpl-queries.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/templates/window-title.html" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$2.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$3.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$4.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$CaptureInterceptor$MyEntityWrapper.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$CaptureInterceptor.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController$ResultType.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/BaseController.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/Controller$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/Controller.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/FhirTesterMvcConfig.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep1.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep2.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep3.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep4.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$IServerBuilderStep5.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig$ServerBuilder.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/TesterConfig.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/client/BearerTokenClientFactory.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/HomeRequest$1.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/HomeRequest.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/ResourceRequest.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/model/TransactionRequest.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/mvc/AnnotationMethodHandlerAdapterConfigurer.class" />
+    <ignored path="../Demo-Server-Stu3/target/tmp/hapi-fhir-testpage-overlay-2_3_war1/WEB-INF/classes/ca/uhn/fhir/to/mvc/ToBindingInitializer.class" />
+    <ignored path="../Demo-Server-Dstu2/.idea/.name" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,8 +658,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="48" />
-    <option name="y" value="71" />
+    <option name="x" value="29" />
+    <option name="y" value="40" />
     <option name="width" value="1213" />
     <option name="height" value="664" />
   </component>
@@ -209,6 +691,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="careConnect-demo-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="careConnect-demo-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="careConnect-demo-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="careConnect-demo-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="careConnect-demo-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,7 +997,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="71" width="1213" height="664" extended-state="0" />
+    <frame x="29" y="40" width="1213" height="664" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -493,13 +1007,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52527076" sideWeight="0.50359714" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21263877" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20804195" sideWeight="0.4964029" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32867134" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2062937" sideWeight="0.4964029" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1793339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1793339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -768,5 +1282,8 @@
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="mavenExecuteGoalHistory">
+    <option value="" />
   </component>
 </project>
