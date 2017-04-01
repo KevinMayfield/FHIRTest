@@ -279,7 +279,7 @@ public class DemoServerTest {
 		WebAppContext webAppContext = new WebAppContext();
 		webAppContext.setContextPath("/");
 		webAppContext.setDescriptor(path + "/src/main/webapp/WEB-INF/web.xml");
-		webAppContext.setResourceBase(path + "/target/demo-server-hapi");
+		webAppContext.setResourceBase(path + "/target/demo-server-dstu2");
 		webAppContext.setParentLoaderPriority(true);
 
 		ourServer.setHandler(webAppContext);
@@ -287,7 +287,7 @@ public class DemoServerTest {
 
 		ourCtx.getRestfulClientFactory().setServerValidationMode(ServerValidationModeEnum.NEVER);
 		ourCtx.getRestfulClientFactory().setSocketTimeout(1200 * 1000);
-		ourServerBase = "http://localhost:" + ourPort + "/baseStu3";
+		ourServerBase = "http://localhost:" + ourPort + "/Dstu2";
 		ourClient = ourCtx.newRestfulGenericClient(ourServerBase);
 		ourClient.registerInterceptor(new LoggingInterceptor(true));
 

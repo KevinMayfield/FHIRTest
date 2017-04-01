@@ -1,27 +1,19 @@
 package uk.nhs.careConnect.dstu2.dao;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import javax.persistence.PersistenceException;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import uk.nhs.careConnect.entity.TermCodeSystem;
 import uk.nhs.careConnect.entity.TermConcept;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceException;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.criteria.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Repository
 @Transactional

@@ -9,6 +9,7 @@ import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import uk.nhs.careConnect.dstu2.provider.PatientResourceProvider;
 import uk.nhs.careConnect.dstu2.provider.ValueSetResourceProvider;
 
 import javax.servlet.ServletException;
@@ -51,7 +52,7 @@ public class DemoServlet extends RestfulServer {
 
 		List<IResourceProvider> providers = new ArrayList<IResourceProvider>();
 		//providers.add(new DocumentReferenceResourceProvider());
-		//providers.add(new PatientResourceProvider());
+		providers.add(new PatientResourceProvider());
 		
 		//providers.add(new ConceptMapResourceProvider());
 		providers.add(new ValueSetResourceProvider());
