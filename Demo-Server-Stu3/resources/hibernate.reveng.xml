@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="FileStore"
+		match-catalog="ExternalDB_LEEDS" match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="PAS_Patient"
+		match-catalog="ExternalDB_LEEDS" match-schema="dbo">
+	</table-filter>
+	<table-filter match-catalog="ExternalDB_LEEDS" match-schema="sys"
+		match-name=".*" exclude="true">
+	</table-filter>
+	<table-filter match-catalog="ExternalDB_LEEDS"
+		match-schema="INFORMATION_SCHEMA" match-name=".*" exclude="true">
+	</table-filter>
+</hibernate-reverse-engineering>
