@@ -1,4 +1,4 @@
-package uk.nhs.careConnect.dstu2.dao;
+package uk.nhs.careConnect.stu3.dao;
 
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.method.RequestDetails;
 import uk.nhs.careConnect.entity.ConceptMapEntity;
-import uk.nhs.careConnect.dstu2.provider.ConceptMapResourceProvider;
+import uk.nhs.careConnect.stu3.provider.ConceptMapResourceProvider;
 import uk.nhs.careConnect.entity.ConceptMapElement;
 import uk.nhs.careConnect.entity.ConceptMapElementTarget;
 import uk.nhs.careConnect.entity.ConceptMapGroup;

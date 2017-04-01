@@ -1,4 +1,4 @@
-package uk.nhs.careConnect.dstu2.provider;
+package uk.nhs.careConnect.stu3.provider;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ import ca.uhn.fhir.rest.param.StringParam;
 
 import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
-import uk.nhs.careConnect.dstu2.dao.CodeSystemDAO;
+import uk.nhs.careConnect.stu3.dao.CodeSystemDAO;
 
 
 

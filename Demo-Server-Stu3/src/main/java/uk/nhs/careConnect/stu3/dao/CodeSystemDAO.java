@@ -1,4 +1,4 @@
-package uk.nhs.careConnect.dstu2.dao;
+package uk.nhs.careConnect.stu3.dao;
 
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.method.RequestDetails;
 import ca.uhn.fhir.rest.param.StringParam;
-import uk.nhs.careConnect.dstu2.provider.CodeSystemResourceProvider;
+import uk.nhs.careConnect.stu3.provider.CodeSystemResourceProvider;
 import uk.nhs.careConnect.entity.TermCodeSystem;
 import uk.nhs.careConnect.entity.TermConcept;
 import uk.nhs.careConnect.entity.TermConceptDescription;
