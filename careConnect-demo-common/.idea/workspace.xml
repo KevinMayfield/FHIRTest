@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9a17277-5622-4012-8ea5-4faecedad9cc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/pom.xml" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/DemoServlet.java" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/DemoServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/FhirServerConfig.java" afterPath="$PROJECT_DIR$/../Demo-Server-Dstu2/src/main/java/uk/nhs/careConnect/dstu2/ServerConfig/FhirServerConfig.java" />
@@ -993,7 +992,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490968801489</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Initial commit - seperated out entity models from dstu2 and stu3 specific code">
+      <created>1491028707124</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1491028707124</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
