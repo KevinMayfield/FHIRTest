@@ -80,7 +80,7 @@
     <orderEntry type="library" name="Maven: com.phloc:phloc-schematron:2.7.1" level="project" />
     <orderEntry type="library" name="Maven: com.phloc:phloc-commons:4.3.3" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.findbugs:annotations:2.0.3" level="project" />
-    <orderEntry type="library" name="Maven: uk.nhs.careConnect:common-core:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: uk.nhs.careConnect:common-core:1.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
   </component>
