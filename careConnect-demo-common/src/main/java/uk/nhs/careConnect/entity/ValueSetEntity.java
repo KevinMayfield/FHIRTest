@@ -1,14 +1,12 @@
 package uk.nhs.careConnect.entity;
 
 
-import java.util.ArrayList;
-
-import java.util.Date;
-import java.util.List;
+import org.hl7.fhir.dstu3.model.Enumerations.PublicationStatus;
 
 import javax.persistence.*;
-
-import org.hl7.fhir.dstu3.model.Enumerations.PublicationStatus;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="ValueSet", uniqueConstraints= @UniqueConstraint(name="PK_VALUESET_MAP", columnNames={"VALUESET_ID"}))
@@ -26,7 +24,7 @@ public class ValueSetEntity extends BaseResource {
 	@Column(name="VALUESET_STRID")
 	private String strId;	
 	public void setStrId(String strId) { this.strId = strId; }
-	public String getStrId() { return strId; }
+	public String getStrId() { return this.strId; }
 
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -91,7 +89,7 @@ public class ValueSetEntity extends BaseResource {
 		
 		
 		// ValueSet CONTENT
-		@OneToMany(mappedBy="valueSetEntity", targetEntity=ValueSetContent.class)
+		@OneToMany(mappedBy="valueSetEntity", targetEntity=ValueSetContent.class, orphanRemoval = true)
 		private List<ValueSetContent> contents;
 		public void setContents(List<ValueSetContent> contents) {
 	        this.contents = contents;
@@ -102,11 +100,11 @@ public class ValueSetEntity extends BaseResource {
 		    }
 	        return this.contents;
 	    }
-		public List<ValueSetContent> addContent(ValueSetContent pi) { 
-			contents.add(pi);
-			return contents; }
-		public List<ValueSetContent> removeContent(ValueSetContent content){ 
-			contents.remove(content); return contents; }
+		//public List<ValueSetContent> addContent(ValueSetContent pi) {
+		//	contents.add(pi);
+		//	return contents; }
+		//public List<ValueSetContent> removeContent(ValueSetContent content){
+		//	contents.remove(content); return contents; }
 		
 		@ManyToOne()
 		@JoinColumn(name = "CODESYSTEM_PID",referencedColumnName = "CODESYSTEM_ID", foreignKey = @ForeignKey(name = "FK_VALUESET_PID_CS_PID"))

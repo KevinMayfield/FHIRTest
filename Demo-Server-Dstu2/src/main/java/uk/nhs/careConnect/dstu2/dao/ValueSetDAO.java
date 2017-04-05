@@ -6,6 +6,7 @@ import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.method.RequestDetails;
 import ca.uhn.fhir.rest.param.StringParam;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.hl7.fhir.instance.model.api.IBaseMetaType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.slf4j.Logger;
@@ -77,49 +78,55 @@ implements IValueSetDAO {
 			log.trace("Call persist");
 			
 			ValueSetEntity vse = null;
+
 			if (valueSet.getId() != null && !valueSet.getId().isEmpty())
 			{
-				vse = (ValueSetEntity) em.find(ValueSetEntity.class,valueSet.getId());
-				// if null try a search on strId
-				if (vse == null)
+				// strId is the exernally facing Id
+
+				CriteriaBuilder builder = em.getCriteriaBuilder();
+
+				CriteriaQuery<ValueSetEntity> criteria = builder.createQuery(ValueSetEntity.class);
+				Root<ValueSetEntity> root = criteria.from(ValueSetEntity.class);
+				List<Predicate> predList = new LinkedList<Predicate>();
+				Predicate p = builder.equal(root.<String>get("strId"),valueSet.getId().getIdPart());
+				predList.add(p);
+				Predicate[] predArray = new Predicate[predList.size()];
+				predList.toArray(predArray);
+				if (predList.size()>0)
 				{
-					CriteriaBuilder builder = em.getCriteriaBuilder();
-			    
-					CriteriaQuery<ValueSetEntity> criteria = builder.createQuery(ValueSetEntity.class);
-					Root<ValueSetEntity> root = criteria.from(ValueSetEntity.class);
-			   		List<Predicate> predList = new LinkedList<Predicate>();
-			   		Predicate p = builder.equal(root.<String>get("strId"),valueSet.getId());
-	    			predList.add(p);
-			   		Predicate[] predArray = new Predicate[predList.size()];
-			   		predList.toArray(predArray);
-			   		if (predList.size()>0)
-			   		{
-			   			criteria.select(root).where(predArray);
-			    
-			   			List<ValueSetEntity> qryResults = em.createQuery(criteria).getResultList();
-			    
-				    	for (ValueSetEntity cme : qryResults)
-				    	{
-				    		log.trace("HAPI Custom = "+cme.getId());	    	
-				    		vse = cme;
-				    		break;
-				    	}
-			   		}
+					criteria.select(root).where(predArray);
+
+					List<ValueSetEntity> qryResults = em.createQuery(criteria).getResultList();
+
+					for (ValueSetEntity cme : qryResults)
+					{
+						vse = cme;
+						break;
+					}
+
 			    }
+			    else
+				{
+					log.info("No existing ValueSet resource");
+				}
 			}
 			if (vse == null)
 			{
 				vse = new ValueSetEntity();
 			}
+			log.info("strId -= "+valueSet.getId().getIdPart());
+			log.info("strId -= "+valueSet.getId().getValue());
+			log.info("strId -= "+valueSet.getId().getValueAsString());
 			if (valueSet.getId() != null && !valueSet.getId().isEmpty())
 			{
-				vse.setStrId(valueSet.getId().toString());
+				log.info("strId -= "+valueSet.getId().getIdPart());
+				vse.setStrId(valueSet.getId().getIdPart());
 			}
 			if (valueSet.getUrl() !=null && !valueSet.getUrl().isEmpty())
 			{
 				vse.setUrl(valueSet.getUrl());
 			}
-			if (valueSet.getName() != null && !valueSet.getId().isEmpty())
+			if (valueSet.getName() != null && !valueSet.getName().isEmpty())
 			{
 				vse.setName(valueSet.getName());
 			}
@@ -134,13 +141,50 @@ implements IValueSetDAO {
 				vse.setDescription(valueSet.getDescription());
 			}
 			
-			log.info("Call em.persist ValueSetEntity");
-			em.persist(vse);
-			
+			log.debug("1 Call em.persist ValueSetEntity contents size = "+vse.getContents().size());
+
+
+            em.persist(vse);
+
+			if (valueSet.getCodeSystem() != null && !valueSet.getCodeSystem().isEmpty())
+            {
+                ValueSet.CodeSystem system = valueSet.getCodeSystem();
+                vse.setTermCodeSystemUrl(system.getSystem());
+                for (ValueSet.CodeSystemConcept concept : system.getConcept())
+                {
+                    Boolean found = false;
+                    ValueSetContent vsec = null;
+                    for (ValueSetContent ocontent : vse.getContents())
+                    {
+                        if (ocontent.getCode().equals(concept.getCode()))
+                        {
+                            vsec = ocontent;
+                            log.info("Found existing code");
+                        }
+                    }
+                    if (vsec == null)
+                    {
+                        vsec = new ValueSetContent(vse);
+                    }
+
+                    if (concept.getCode() != null && !concept.getCode().isEmpty())
+                    {
+                        vsec.setCode(concept.getCode());
+                    }
+                    if (concept.getDisplay() != null && !concept.getCode().isEmpty())
+                    {
+                        vsec.setDisplay(concept.getDisplay());
+                    }
+
+                    em.persist(vsec);
+                }
+            }
+            // These entries should really link into CodeSystem table
 			if (valueSet.getCompose() !=null && !valueSet.getCompose().isEmpty())
 			{
 				ValueSet.Compose component = valueSet.getCompose();
-				
+
+
 				for (ValueSet.ComposeInclude include : component.getInclude())
 				{
 					if (include.getSystem() != null && !include.getSystem().isEmpty())
@@ -150,7 +194,20 @@ implements IValueSetDAO {
 					for (ValueSet.ComposeIncludeConcept concept: include.getConcept())
 					{
 						// Ideally should record against TRM_CONCEPT but for ad-hocs this is fine
-						ValueSetContent vsec = new ValueSetContent(vse);
+                        ValueSetContent vsec = null;
+                        for (ValueSetContent ocontent : vse.getContents())
+                        {
+                            if (ocontent.getCode().equals(concept.getCode()))
+                            {
+                                vsec = ocontent;
+                                log.info("Found existing code");
+                            }
+                        }
+                        if (vsec == null)
+                        {
+                            vsec = new ValueSetContent(vse);
+                        }
+
 						if (concept.getCode() != null && !concept.getCode().isEmpty())
 						{
 							vsec.setCode(concept.getCode());
@@ -169,11 +226,12 @@ implements IValueSetDAO {
 					}
 				}
 			}
-				
+
 			em.getTransaction().commit();
 			
 			log.info("Called PERSIST id="+vse.getId().toString());
-			valueSet.setId(vse.getId().toString());
+			log.info("Called PERSIST strId="+vse.getStrId());
+			valueSet.setId(vse.getStrId());
 			
 			em.close();
 			
@@ -254,22 +312,52 @@ implements IValueSetDAO {
 	}
 	@Override
 	public ValueSet read(IIdType theId) {
-		log.info("called read theId="+ theId.toString());
-		log.info("called read Id="+ theId.getIdPart());
+
 		ValueSet valueSet  = null;
 		try
 		{
 			
 			EntityManager em = emf.createEntityManager();
-			log.info("Obtained entityManager Patient.read");
-			
-			
-			ValueSetEntity cme = (ValueSetEntity) em.find(ValueSetEntity.class,Integer.parseInt(theId.getIdPart()));
-			
+			log.info("Obtained entityManager Patient.read " + theId.getIdPart() );
+
+			ValueSetEntity cme = null;
+			// strId is the exernally facing Id
+
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+
+			CriteriaQuery<ValueSetEntity> criteria = builder.createQuery(ValueSetEntity.class);
+			Root<ValueSetEntity> root = criteria.from(ValueSetEntity.class);
+			List<Predicate> predList = new LinkedList<Predicate>();
+			Predicate p = builder.equal(root.<String>get("strId"),theId.getIdPart());
+			predList.add(p);
+			Predicate[] predArray = new Predicate[predList.size()];
+			predList.toArray(predArray);
+			if (predList.size()>0)
+			{
+				criteria.select(root).where(predArray);
+
+				List<ValueSetEntity> qryResults = em.createQuery(criteria).getResultList();
+
+				for (ValueSetEntity vse : qryResults)
+				{
+					log.trace("HAPI Custom = "+vse.getId());
+					cme = vse;
+					break;
+				}
+
+			}
+			else
+			{
+				log.debug("No existing ValueSet resource");
+			}
+			if (cme == null && NumberUtils.isNumber(theId.getIdPart())  ) {
+				// Need to check for strings.
+				cme = (ValueSetEntity) em.find(ValueSetEntity.class, Integer.parseInt(theId.getIdPart()));
+			}
 			valueSet = convert(cme);
 			
 			em.close();
-	        log.info("Built the Patient");
+	        log.trace("Built the Patient");
 	       	
 			return valueSet;
 		}
@@ -280,7 +368,7 @@ implements IValueSetDAO {
 		}
 		finally
 		{
-			log.info("In the finally");
+			log.trace("In the finally");
 		}
 		
 		
